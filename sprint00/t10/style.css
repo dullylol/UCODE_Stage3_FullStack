@@ -1,0 +1,41 @@
+.week {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+}
+
+img {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+p {
+    background-color: steelblue;
+    color: white;
+    margin-top: 1px;
+    font-family: Lato Bold (700);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+h4 {
+    font-family: Lato Regular (400);
+    font-size: 2em;
+    text-align: center;
+}
+
+.day1, .day2, .day3, .day4, .day5, .day6, .day7 {
+    display: flex;
+    width: 14%;
+    min-width: 120px;
+    height: auto;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.day1:hover, .day2:hover, .day3:hover, .day4:hover, .day5:hover, .day6:hover, .day7:hover {
+    box-shadow: 0 14px 28px grey, 0 10px 10px grey;
+}

@@ -1,0 +1,35 @@
+h1 {
+    margin-left: 70px;
+    margin-bottom: 50px;
+}
+
+.box {
+    background-color: lightgray;
+    padding: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    position: relative;
+  }
+
+.box::after, .box::before {
+    content: "";
+    position: absolute;
+}
+
+.box::after {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    height: calc(100% + 50px);
+    width: 100%;
+    top: -25px;
+    left: -1px;
+  }
+
+.box::before {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    height: 100%;
+    width: calc(100% + 50px);
+    top: -1px;
+    left: -25px;
+  }

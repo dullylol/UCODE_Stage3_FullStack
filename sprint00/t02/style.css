@@ -1,0 +1,31 @@
+div {
+    display: flex;
+    margin-right: 7px;
+    margin-left: 5px;
+}
+
+input {
+    border: 2px solid blue;
+    line-height: 2em;
+    color: green;
+    width: 100%;
+
+}
+
+button {
+    border-radius: 4px;
+    color: green;
+}
+
+.search:hover {
+    border: 2px solid blue;
+    color: green;
+}
+
+.search:active {
+    color: green;
+}
+
+button:hover, .search:hover {
+    color: red;
+}

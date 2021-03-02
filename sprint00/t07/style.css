@@ -1,0 +1,52 @@
+table {
+    width: 100%;
+    text-align: center;
+    border: 4px solid black;
+    border-collapse: collapse;
+    background: linear-gradient(to right,rgba(110, 0, 0, 0.9), rgba(181, 147, 134));
+}
+
+td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    text-transform: uppercase;
+    color:#ffe369;
+    font-weight: bold;
+    background-color: rgba(110, 0, 0, 0.4);
+    border: 2px, color - rgba(189, 195, 199, 0.05);
+    padding: 10px;
+}
+
+.hero1, .hero2 {
+    color: white;
+    font-weight: bold;
+}
+
+.hero1 {
+    background-color: linear-gradient(to right, rgb(75, 10, 10), white);
+}
+
+.hero2 {
+    background-color: #88443C;
+}
+
+#skills {
+    background: antiquewhite;
+    color: midnightblue;
+    padding: 5px 50px 5px 50px;
+    border: 2px, rgba(189, 195, 199, 0.05);
+}
+
+#absolute_skills {
+    color: white;
+    background-color: darkred;
+}
+
+a {
+    color:white;
+    font-weight: bold;
+    padding: 10px;
+    text-decoration: underline;
+}

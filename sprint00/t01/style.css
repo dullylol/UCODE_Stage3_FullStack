@@ -1,0 +1,54 @@
+#soul_stone {
+    background-color: rgb(204, 149, 77);
+    color: black;
+}
+
+#time_stone {
+    background-color: rgb(55, 126, 34);
+    color: black;
+}
+
+#space_stone {
+    background-color: rgb(34, 86, 141);
+    color: black;
+}
+
+#mind_stone {
+    background-color: rgb(255, 255, 85);
+    color: black;
+}
+
+#reality_stone {
+    background-color: rgb(178, 56, 53);
+    color: black;
+}
+
+#power_stone {
+    background-color: rgb(127, 117, 178);
+    color: black;
+}
+
+#main_table {
+    border: 2px solid #DDD9D5;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+img {
+    border-radius: 25px;
+    height: 120px;
+    padding: 3px;
+    width: 120px;
+    
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+td {
+    padding: 8px;
+    border: 3px solid white;
+}
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="description" content="t08. Superhero aplication" charset="utf-8">
+        <title>Superhero aplication</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h2>Superhero Form</h2>
+        <fieldset class="border">
+        
+            <fieldset class="border">
+                <legend>About the Superhero</legend>
+                <form>
+                    <label>Real Name</label>
+                    <input type="text" placeholder="Superhero real name">
+                    <label>Superhero Name</label>
+                    <input type="text" placeholder="Superhero alias">
+                    <label>Age</label>
+                    <input type="number" min="1" max="999" step="1">
+                    <br><br>
+                    <label>About</label>
+                    <textarea type="text" maxlength="500" rows="5" cols="70" placeholder="Information about superhero, max 500 symbols"></textarea>
+                    <br><br>
+                    <label>Photo:</label>
+                    <input type="file" id="choose">
+                </form>
+            </fieldset>
+
+            <fieldset class="border">
+                <legend>Powers</legend>
+                <form>
+                    <input type="checkbox">
+                    <label>Telekinesis</label>
+                    <input type="checkbox">
+                    <label>Super strenght or speed</label>
+                    <input type="checkbox">
+                    <label>Shapeshifting</label>
+                    <input type="checkbox">
+                    <label>Flight</label>
+                    <input type="checkbox">
+                    <label>Elemental control</label>
+                    <input type="checkbox">
+                    <label>Other</label>
+                    <br><br>
+                    <label>Level of control:</label>
+                    <input type="range" min="0" max="10" step="1">
+                </form>
+            </fieldset>
+
+            <fieldset class="border">
+                <legend>Origin of Powers</legend>
+                <form>
+                    <input type="radio">
+                    <label>Unknown</label>
+                    <input type="radio">
+                    <label>Freak lab accident</label>
+                    <input type="radio">
+                    <label>Choosen by an accident wise being</label>
+                    <input type="radio">
+                    <label>The superhero is not human</label>
+                    <input type="radio">
+                    <label>Other</label>
+                </form>
+            </fieldset>
+
+            <br>
+
+            <form>
+                <button onclick="document.getElementById('myInput').value = ''">CLEAR</button>
+                <button type="submit">SEND</button>
+            </form>
+
+        </fieldset>
+    </body>
+
+</html>
