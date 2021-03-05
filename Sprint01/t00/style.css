@@ -1,0 +1,17 @@
+.img {
+    width: 200px;
+    float: left;
+    margin: 5px 10px 10px 5px;
+}
+
+@media print {
+    .img {
+        float: none;
+        display: block;
+    }
+}
+
+p {
+    text-indent: 20px;
+    font-size: x-large;
+}

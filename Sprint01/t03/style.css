@@ -1,0 +1,58 @@
+.head {
+  display: block;
+  height: 40px;
+  text-align: center;
+  background: linear-gradient(0.25turn, red, orange, yellow, green, blue, purple, violet);
+  color: white;
+}
+
+.menu li ul a {
+  background-color: violet;
+  font-size: 21px;
+  text-align: left;
+  vertical-align: middle;
+  height: 30px;
+}
+
+.menu>ul {
+  justify-content: center;
+  list-style: none;
+  display: flex;
+}
+
+.menu>ul a {
+  display: block;
+  background-color: darkviolet;
+  padding-top: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 15px;
+  width: 250px;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+}
+
+.menu li ul {
+  position: absolute;
+  list-style: none;
+  display: none;
+  padding: 0px;
+}
+
+.menu li a:hover {
+  background-color: purple;
+}
+
+.menu li:hover>ul {
+  display: block;
+}
+
+.menu li>ul li ul {
+  left: 270px;
+  top: 0px;
+}
+
+#main_menu {
+  margin: 10px 5px 0px 0px;
+}

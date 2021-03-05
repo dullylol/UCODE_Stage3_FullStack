@@ -1,0 +1,16 @@
+.hand {
+    width: 140px;
+}
+
+tr img {
+    width: 48px;
+    height: 48px;
+}
+
+.hand:hover~table .man_row1 td:nth-child(2n+1) {
+    visibility: hidden;
+}
+
+.hand:hover~table .man_row2 td:nth-child(2n) {
+    visibility: hidden;
+}

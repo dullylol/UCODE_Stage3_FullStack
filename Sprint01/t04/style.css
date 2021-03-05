@@ -1,0 +1,51 @@
+.h {
+    text-align: center;
+    position: relative;
+}
+
+.topic_html {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.topic_css {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.topic_protocol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.block {
+    display: inline-block;
+    margin: 8px auto;
+    border: 1px solid grey;
+    padding: 8px 8px;
+}
+
+.block img {
+    height: 150px;
+}
+
+@media (min-width: 320px) {
+    .block {
+        width: calc(100% - 20px);
+    }
+}
+
+@media (min-width: 768px) {
+    .block {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .block {
+        width: calc(25% - 20px);
+    }
+}

@@ -1,0 +1,40 @@
+h1 {
+    text-align: center;
+}
+
+.block {
+    justify-content: center;
+    display: flex;
+}
+
+button {
+    margin: 0px;
+    padding: 0px;
+    color: green;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 2em;
+    height: 30px;
+}
+
+input {
+    color: green;
+    margin: 0;
+    padding: 0;
+    text-indent: 0px;
+    transition: text-indent 300ms;
+    height: 2em;
+    width: 12cm;
+}
+
+input:hover {
+    border: 2px solid blue;
+}
+
+input:active {
+    color: green;
+}
+
+button:hover, .search:hover {
+    color: red;
+}
