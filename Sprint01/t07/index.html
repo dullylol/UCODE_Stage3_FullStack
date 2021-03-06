@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cicle of life</title>
+    <meta name="description" content="t07. GAMESHOP">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="search_container">
+    <nav>
+        <h1><a href="index.html">GAMESHOP</a></h1>
+        <div class="search">
+            <div class="search-block">
+                <input type="search" placeholder="Enter search phrase" class="search">
+                <button type="submit" class="fn">Find</button>
+            </div>
+        </div>
+
+        <span class="phone" href="#">+38066666666</span>
+    </nav>
+</div>
+
+<ul class="catalog-path">
+    <li><a href="index.html">Home</a></li>
+    <li>Catalog</li>
+</ul>
+
+<section class="products">
+    <div class="section-model">
+        <h2>Catalog</h2>
+    </div>
+
+    <div class="radio-filters">
+        <div class="form_radio_button">
+            <input id="smartphone" type="radio" name="type" value="type-smartphone" />
+            <label for="smartphone">GTX</label>
+        </div>
+
+        <div class="form_radio_button">
+            <input id="notebook" type="radio" name="type" value="type-notebook" />
+            <label for="notebook">RTX</label>
+        </div>
+
+    </div>
+    <div class="catalog-grid">
+        <div class="filters-menu">
+            <div class="checkboxes">
+                <p><b>Videocards</b></p>
+                <p>
+                    <input type="checkbox" name="color" value="graphite" />Cool<br>
+                    <input type="checkbox" name="color" value="pacific-blue" />Hot<br>
+                    <input type="checkbox" name="color" value="silver" />Big<br>                    
+                </p>
+            </div>
+            <div class="prices">
+                <p><b>Price</b></p>
+                <div class="price">
+                    <input id="price-range" type="range" value="2500" min="0" max="5000" />
+                    <p id="price-count">
+                    <h5>5000$</h5>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="products-center">
+            <a href="card.html">
+                <article>
+                    <div class="img-container">
+                        <div class="slider-container">
+                            <img src="assets/images/1660ti.jpg" alt="product"
+                                style="display: block; width: 100%; height: 300px; cursor: pointer;" />
+                        </div>
+                        <button class="buy-button" data-id="1">
+                            Buy
+                        </button>
+                    </div>
+                    <h2>GTX 1660ti</h2>
+                    <h3>700$</h3>
+                </article>
+            </a>
+            <a>
+                <article>
+                    <div class="img-container">
+                        <div class="slider-container">
+                            <img src="assets/images/3060ti.jpg" alt="product"
+                                style="display: block; width: 100%; height: 300px; cursor: pointer;" />
+                        </div>
+                        <button class="not-evailable-button" data-id="1">
+                            Not evailable
+                        </button>
+                    </div>
+                    <h2>RTX 3070</h2>
+                    <h3>$1200</h3>
+                </article>
+            </a>
+            <a>
+                <article>
+                    <div class="img-container">
+                        <div class="slider-container">
+                            <img src="assets/images/3070.jpg" alt="product"
+                                style="display: block; width: 100%; height: 300px; cursor: pointer;" />
+                        </div>
+                        <button class="not-evailable-button" data-id="1">
+                            Not evailable
+                        </button>
+                    </div>
+                    <h2>RTX 3090</h2>
+                    <h3>$1800</h3>
+                </article>
+            </a>
+        </div>
+</section>
+
+</body>
+
+
+</html>
