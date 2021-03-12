@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upgrade Human</title>
+    <meta name="description" content="t03. Upgrade Human">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <h1>Upgrade Human</h1>
+
+    <img id="image" src="assets/images/human.jpg" />
+
+    <div id="HumanCard">
+        <div class="block1">
+            <input type="number" min="1" max="100" id="seconds-count">
+            <input type="button" value="Sleep for" onclick="human.sleepFor()" id="button-sleep">
+            <input type="button" value="Feed!!!" onclick="human.feed()" id="button-feed">
+        </div>
+
+        <div class="man-status" id="status" style="display: block;">I'm awake up!</div>
+
+        <div class="info">
+            <div ><span>FirstName: </span><span id="firstName"></span></div>
+            <div ><span>LastName: </span><span id="lastName"></span></div>
+            <div ><span>Gender: </span><span id="gender"></span></div>
+            <div ><span>Age: </span><span id="age"></span></div>
+            <div ><span>Calories: </span><span id="calories"></span></div>
+        </div>
+
+        <div class="to-superhero-button">
+            <input id="turnIntoSuperheroButton" type="button" value="Turn into superhero" onclick="turnIntoSuperheroButton(human)" />
+        </div>     
+    </div>
+
+    <div id="SuperheroCard" style="display: none;" disabled>
+        <div class="block1">
+            <input type="number" min="1" max="100" id="seconds-count2">
+            <input type="button" value="Sleep for" onclick="thor.sleepFor()" id="button-sleep2">
+            <input type="button" value="Feed!!!" onclick="thor.feed()" id="button-feed2">
+        </div>
+
+        <div class="thor-block">
+            <input type="button" value="Fly" onclick="thor.fly()" id="button-fly2">
+            <input type="button" value="Fight" onclick="thor.fightWithEvil()" id="button-fight2">
+        </div>
+
+        <div class="man-status" id="status2" style="display: block;">I'm awake up!</div>
+
+        <div class="info">
+            <div ><span>FirstName: </span><span id="firstName2"></span></div>
+            <div ><span>LastName: </span><span id="lastName2"></span></div>
+            <div ><span>Gender: </span><span id="gender2"></span></div>
+            <div ><span>Age: </span><span id="age2"></span></div>
+            <div ><span>Calories: </span><span id="calories2"></span></div>
+        </div>
+   
+    </div>
+
+
+</body>
+
+</html>

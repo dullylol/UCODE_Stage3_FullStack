@@ -1,0 +1,38 @@
+h1 {
+    text-align: center;
+}
+
+img {
+    width: 100%;
+}
+
+input[type="button"]  {
+    border-radius: 10px;
+    background-color: rgb(166, 195, 196);
+}
+
+
+.to-superhero-button, .man-status {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.block1, .thor-block {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.info {
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
