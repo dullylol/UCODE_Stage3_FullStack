@@ -2,10 +2,13 @@ let wordInput = document.getElementById("word_input")
 let textInput = document.getElementById("text_input")
 let output = document.getElementById("output")
 
-let phone = 0
-let count = 0
-let replace = 0
+let phone = getCookiePhone()
+let count = getCookieCount()
+let replace = getCookieReplace()
 
+document.getElementsByClassName("butt")[0].children[0].value = `To phone number [${phone}]`
+document.getElementsByClassName("butt")[0].children[1].value = `Word count [${count}]`
+document.getElementsByClassName("butt")[0].children[2].value = `Word replace [${replace}]`
 
 function toPhoneNumber() {
     let word = wordInput.value
@@ -26,10 +29,13 @@ function toPhoneNumber() {
         output.value = "Invalid phone number!"
     }
 
-    document.cookie = "phone=" + (++phone) 
-    document.cookie = "count=" + (count) 
-    document.cookie = "replace=" + (replace)
+
+    document.cookie = "phone=" + encodeURIComponent(++phone)  + '; max-age=60'
+
     console.log(document.cookie)
+
+    document.getElementsByClassName("butt")[0].children[0].value = `To phone number [${phone}]`
+
 }
 
 function wordCount() {
@@ -38,10 +44,11 @@ function wordCount() {
 
     output.value = "Word count: " + (text.split(word).length - 1);
 
-    document.cookie = "phone=" + (phone) 
-    document.cookie = "count=" + (++count) 
-    document.cookie = "replace=" + (replace)
+
+    document.cookie = "count=" + encodeURIComponent(++count)  + '; max-age=60'
     console.log(document.cookie)
+
+    document.getElementsByClassName("butt")[0].children[1].value = `Word count [${count}]`
 }
 
 function wordReplace() {
@@ -55,15 +62,27 @@ function wordReplace() {
         output.value += " " + word
     }
 
-    document.cookie = "phone=" + (phone) 
-    document.cookie = "count=" + (count) 
-    document.cookie = "replace=" + (++replace)
+    document.cookie = "replace=" + encodeURIComponent(++replace) + '; max-age=60'
     console.log(document.cookie)
+
+    document.getElementsByClassName("butt")[0].children[2].value = `Word replace [${replace}]`
 }
 
 
-setInterval(() => {
-    document.cookie = "phone=;"
-    document.cookie = "count=;" 
-    document.cookie = "replace=;"
-}, 60000)
+function getCookieReplace() {
+    let replaceNum = document.cookie.replace(/(?:(?:^|.*;\s*)replace\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    return (replaceNum == "") ? 0 : Number(replaceNum)
+}
+
+function getCookiePhone() {
+    let phoneNum = document.cookie.replace(/(?:(?:^|.*;\s*)phone\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    return (phoneNum == "") ? 0 : Number(phoneNum)
+}
+
+function getCookieCount() {
+    let countNum = document.cookie.replace(/(?:(?:^|.*;\s*)count\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    return (countNum == "") ? 0 : Number(countNum)
+}
+
+
+

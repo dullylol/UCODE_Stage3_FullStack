@@ -2,7 +2,8 @@
   margin: 15px;
   display: flex;
   flex-flow: column wrap;
-  margin-right: calc(100% - 40%);
+  align-items: center;
+  justify-content: center;
 }
 
 .butt {
@@ -26,7 +27,7 @@ input[type="button"] {
   display: inline;
 }
 
-input[type="text"] {
+textarea {
   height: 25px;
   border-radius: 5px;
   border: none;
@@ -40,8 +41,7 @@ input[type="text"] {
 .blockm {
   display: flex;
   flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
+
 }
 
 textarea {

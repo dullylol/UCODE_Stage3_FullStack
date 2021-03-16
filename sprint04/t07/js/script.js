@@ -9,8 +9,6 @@ const apiKey = "e6f832eeb03a5092e029b4bf9c9fc719";
 
 const container = document.querySelector('#weather');
 
-//const requestGetParams = `q=${encodeURIComponent("Kharkiv")}&cnt=6&appid=${apiKey}`;
-//const requestUrl    = `http://api.openweathermap.org/data/2.5/forecast/daily?q=Kharkiv&cnt=4&appid=${apiKey}`;
 const requestUrl   = `http://api.openweathermap.org/data/2.5/forecast?lang=ru&q=Kharkiv&appid=${apiKey}`
 fetch(requestUrl).then(
     res => res.json()
@@ -42,6 +40,18 @@ fetch(requestUrl).then(
             days[i].children[1].src = "assets/images/clowdy.png"
         }
         //add new images
+        else if (days[i].children[1].getAttribute("alt") == "Rain") {
+            days[i].children[1].src = "assets/images/rain.png"
+        }
+        else if (days[i].children[1].getAttribute("alt") == "Snow") {
+            days[i].children[1].src = "assets/images/Snow.png"
+        }
+        else if (days[i].children[1].getAttribute("alt") == "Sun") {
+            days[i].children[1].src = "assets/images/sun.jpg"
+        }
+        else {
+            days[i].children[1].src = "assets/images/windy.png"
+        }
     }
     
 });

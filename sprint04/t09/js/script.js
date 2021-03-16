@@ -1,6 +1,25 @@
 let textInput = document.getElementById("text_input")
 let history = document.getElementById("history")
-let key = 0
+var key = 0
+
+while (true) {
+    if (localStorage.getItem(key) == null) {
+        break;
+    }
+    else {
+        key++
+    }
+}
+
+
+if (localStorage.getItem(key - 1) == null) {
+    history.value = "empty"
+}
+else {
+    for (let i = 0; i < key; i++) {
+        history.value += "--> " + localStorage.getItem(i) + "\n"
+    }
+}
 
 function addToStorage() {
     let today = new Date()
@@ -11,9 +30,9 @@ function addToStorage() {
     let minutes = String(today.getMinutes()).padStart(2, '0')
     let sec = String(today.getSeconds()).padStart(2, '0')
 
-    today = '[' + mm + '.' + dd + '.' + yyyy + ',' + hours + ':' + minutes + ':' + sec + ']'
+    today = ' [' + mm + '.' + dd + '.' + yyyy + ', ' + hours + ':' + minutes + ':' + sec + ']'
     localStorage.setItem(key++, textInput.value + today)
-    history.value = "--> " + localStorage.getItem(key - 1)
+    history.value += "--> " + localStorage.getItem(key - 1) + "\n"
     console.log(textInput.value + today)
 }
 
