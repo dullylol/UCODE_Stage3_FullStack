@@ -1,0 +1,26 @@
+img {
+  height: 200px;
+  width: 200px;
+  margin-bottom: 30px;
+}
+
+.header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+h2 {
+  width: fit-content;
+}
+
+#counter {
+  position: fixed;
+  text-align: right;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-left: calc(100% - 200px);
+  background-color: red;
+  height: fit-content;
+  margin-top: 25px;
+}

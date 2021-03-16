@@ -1,0 +1,55 @@
+.main{
+  background-color: whitesmoke;
+  border-radius: 20px 20px  0 0;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  margin: 20px;
+}
+
+.city{
+  text-align: center;
+  padding: 15px 0;
+  background-color: #0086d6;
+  border-radius: 20px 20px  0 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.2em;
+}
+
+.content{
+  padding-right:  30px;
+  padding-left: 30px ;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+.days{
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+img{
+  width:150px;
+  height:150px;
+  margin: 7px 0; 
+  padding: 5px;
+}
+
+p{
+  font-family: Lato, Verdana;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+
+}
+
+.date{
+  font-size: 1.2em;
+  border-bottom: 3px solid rgb(155, 237, 235);
+}
+
+.temp{
+  font-size: 1.4em;
+  margin-bottom:10px;
+}
