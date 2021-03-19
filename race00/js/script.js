@@ -11,41 +11,47 @@ function addNewNumber(num) {
 }
 
 function arithmeticOperation(operation) {
-    let input = inputStr.innerHTML
+    let resStr = resultStr.value
 
-    if (input != "" && resultStr.value == "" && isOperation(input[input.length - 1])) {
-        inputStr.innerHTML = input.substring(0, input.length - 1) + operation
+    if (isOperation(resStr[resStr.length - 1])) {
+        resultStr.value = resStr.substring(0, resStr.length - 1) + operation
     }
     else {
-        inputStr.innerHTML += resultStr.value + operation
-        resultStr.value = ""
+        resultStr.value += operation
     }
 }
 
 function equals() {
-    resultStr.value = Number(eval(replaceHardOperations(inputStr.innerHTML + resultStr.value)))
-    inputStr.innerHTML = ""
+    inputStr.innerHTML = resultStr.value
+    resultStr.value = Number(eval(replaceHardOperations(resultStr.value)))
 }
 
 function toggleNumber() {
     if (resultStr.value == "") {
-        return // I should realize taking number from inputStr.innerHTML
+        return
     }
-
+    equals()
     resultStr.value = -Number(resultStr.value)
 }
 
 function percent() {
     if (resultStr.value == "") {
-        return // I should realize taking number from inputStr.innerHTML
+        return
     }
-
+    equals()
     resultStr.value = Number(resultStr.value) / 100
 }
 
 function reset() {
     resultStr.value = "0"
     inputStr.innerHTML = ""
+}
+
+function backspace() {
+    resultStr.value =  resultStr.value.substring(0, resultStr.value.length - 1)
+    if (resultStr.value == "") {
+        resultStr.value = "0"
+    }
 }
 
 function squareRoot() {
@@ -61,8 +67,10 @@ function memoryRecall() {
     }
 }
 
-function memoryClear() {
-    localStorage.setItem("result", "")
+function memoryLoad() {
+    if (localStorage.getItem("result") != "") {
+        resultStr.value = localStorage.getItem("result")
+    }
 }
 
 function memoryPlus() {
@@ -83,9 +91,7 @@ function memoryMinus() {
     }
 }
 
-
 //===============================helping functions===============================//
-
 
 function isOperation(operation) {
     return operation == "+" || operation == "-" || operation == "*"
@@ -93,7 +99,7 @@ function isOperation(operation) {
         || operation == "!"
 }
 
-function replaceHardOperations(input) {
+function replaceHardOperations(input) { 
     let str = ""
 
     for (let i = 0; i < input.length; i++) {
@@ -119,7 +125,8 @@ function replaceHardOperations(input) {
             resArr.push(arrStr[i])
         }
     }
-    
+    console.log(arrStr)
+    console.log(resArr)
     return resArr.join("")
 }
 

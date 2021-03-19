@@ -73,6 +73,10 @@ td {
     height: 100%;
 }
 
+#operation_memory_recall {
+    border-bottom-left-radius: 12px;
+}
+
 .operation, .number, .symbol {
     text-align: center;
     transition: 0.2s ease;
@@ -86,10 +90,6 @@ td {
 
 .operation:active, .number:active, .symbol:active {
     background-color: rgb(100, 30, 230);
-}
-
-#number_zero {
-    border-bottom-left-radius: 12px;
 }
 
 #operation_equal {
