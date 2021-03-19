@@ -6,14 +6,21 @@ function addNewNumber(num) {
     if (resultStr.value == 0) {
         resultStr.value = ""
     }
-    resultStr.value += num
-
+    if (num == "e" && !isHaveDots()) {
+        resultStr.value += 2.71
+    }
+    else if (num == "pi" && !isHaveDots()) {
+        resultStr.value += 3.14
+    }
+    else if (num != "e" && num != "pi") {
+        resultStr.value += num
+    }
 }
 
 function arithmeticOperation(operation) {
     let resStr = resultStr.value
 
-    if (isOperation(resStr[resStr.length - 1])) {
+    if (isOperation(resStr[resStr.length - 1]) && resStr[resStr.length - 1] != "!") {
         resultStr.value = resStr.substring(0, resStr.length - 1) + operation
     }
     else {
@@ -62,30 +69,36 @@ function squareRoot() {
 
 //-----------------------History-----------------------
 function memoryRecall() {
-    if (resultStr.value != "") {
+    if (resultStr.value != null) {
         localStorage.setItem("result", resultStr.value)
     }
 }
 
-function memoryLoad() {
-    if (localStorage.getItem("result") != "") {
-        resultStr.value = localStorage.getItem("result")
+function memoryClear() {
+    localStorage.clear()
+}
+
+function memoryStore() {
+    if (localStorage.getItem("result") != null) {
+        resultStr.value += localStorage.getItem("result")
     }
 }
 
 function memoryPlus() {
-    if (localStorage.getItem("result") != "") {
-        localStorage.setItem("result", Number(localStorage.getItem("result")) +
-            Number(resultStr.value))
+    let history = localStorage.getItem("result")
+
+    if (history != null) {
+        localStorage.setItem("result", Number(history) + Number(resultStr.value))
 
         resultStr.value = localStorage.getItem("result")
     }
 }
 
 function memoryMinus() {
-    if (localStorage.getItem("result") != "") {
-        localStorage.setItem("result", Number(localStorage.getItem("result")) -
-            Number(resultStr.value))
+    let history = localStorage.getItem("result")
+
+    if (history != null) {
+        localStorage.setItem("result", Number(history) - Number(resultStr.value))
 
         resultStr.value = localStorage.getItem("result")
     }
@@ -95,7 +108,7 @@ function memoryMinus() {
 
 function isOperation(operation) {
     return operation == "+" || operation == "-" || operation == "*"
-        || operation == "/" || operation == "+" || operation == "ˆ"
+        || operation == "/" || operation == "+" || operation == "^"
         || operation == "!"
 }
 
@@ -113,7 +126,7 @@ function replaceHardOperations(input) {
     let resArr = []
 
     for (let i = 0; i < arrStr.length; i++) {
-        if (arrStr[i + 1] == "ˆ") {
+        if (arrStr[i + 1] == "^") {
             resArr.push(Math.pow(arrStr[i], arrStr[i + 2]))
             i += 2
         }
@@ -125,17 +138,30 @@ function replaceHardOperations(input) {
             resArr.push(arrStr[i])
         }
     }
+
     console.log(arrStr)
     console.log(resArr)
+
     return resArr.join("")
 }
 
 function factorial(num) {
-    let total = 1
-
-    for (let i = 1; i <= Number(num); i++) {
-        total *= i
+    if (num <= 1) {
+        return 1
     }
-    return total
 
+    return num * factorial(num - 1)
+}
+
+function isHaveDots() {
+    let isHaveDots = false
+    for (let i = 0; i < resultStr.value.length; i++) {
+        if (resultStr.value[i] == ".") {
+            isHaveDots = true
+        }
+        if (isOperation(resultStr.value[i])) {
+            isHaveDots = false
+        }
+    }
+    return isHaveDots
 }

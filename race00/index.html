@@ -6,66 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <main id="main_block">
 
-        <div id="name">Calculator</div>
+        <header>
+            <span>Calculator</span>
+            <img src="assets/img/history-clock-button.svg" alt="History">
+        </header>
+
 
         <div id="calculator_block">
 
             <div id="input_block">
                 <div id="input_str"></div>
-                <input id="result_str" type="text" readonly value="0" />
+                <input maxlength="10" id="result_str" type="text" readonly value="0" />
             </div>
 
             <div id="buttons_block">
+                <span id="contentBlocker" onclick="addActive()"></span>
 
-                <table id="buttons_table">
-                    <tr>
-                        <td class="operation" id="operation_clear" onclick="reset()">C</td>
-                        <td class="operation" id="operation_backspace" onclick="backspace()">⌫</td>
-                        <td class="number" id="number_bracket_left" onclick="addNewNumber('(')">(</td>
-                        <td class="number" id="number_bracket_right" onclick="addNewNumber(')')">)</td>
-                        <td class="operation" id="operation_division" onclick="arithmeticOperation('/')">÷</td>
-                    </tr>
-                    <tr>
-                        <td class="operation" id="operation_plus-minus" onclick="toggleNumber()">+/-</td>
-                        <td class="number" id="number_seven" onclick="addNewNumber(7)">7</td>
-                        <td class="number" id="number_eight" onclick="addNewNumber(8)">8</td>
-                        <td class="number" id="number_nine" onclick="addNewNumber(9)">9</td>
-                        <td class="operation" id="number_multiple" onclick="arithmeticOperation('*')">*</td>
-                    </tr>
-                    <tr>
-                        <td class="operation" id="operation_percent" onclick="percent()">%</td>
-                        <td class="number" id="number_four" onclick="addNewNumber(4)">4</td>
-                        <td class="number" id="number_five" onclick="addNewNumber(5)">5</td>
-                        <td class="number" id="number_six" onclick="addNewNumber(6)">6</td>
-                        <td class="number" id="number_plus" onclick="arithmeticOperation('+')">+</td>
-                    </tr>
-                    <tr>
-                        <td class="operation" id="operation_exponentiation" onclick="arithmeticOperation('ˆ')">ˆ</td>
-                        <td class="number" id="number_one" onclick="addNewNumber(1)">1</td>
-                        <td class="number" id="number_two" onclick="addNewNumber(2)">2</td>
-                        <td class="number" id="number_three" onclick="addNewNumber(3)">3</td>
-                        <td class="number" id="number_minus" onclick="arithmeticOperation('-')">-</td>
-                    </tr>
-                    <tr>
-                        <td class="operation" id="operation_factorial" onclick="arithmeticOperation('!')">X!</td>
-                        <td class="operation" id="operation_square_root" onclick="squareRoot()">√x</td>
-                        <td class="number" id="number_zero" onclick="addNewNumber(0)">0</td>
-                        <td class="symbol" id="dot" onclick="addNewNumber('.')">.</td>
-                        <td class="operation" id="operation_equal" rowspan="2" onclick="equals()">=</td>
-                    </tr>
-                    <tr>
-                        <td class="operation" id="operation_memory_recall" onclick="memoryRecall()">MR</td>
-                        <td class="operation" id="operation_memory_clear" onclick="memoryLoad()">ML</td>
-                        <td class="operation" id="operation_memory_next" onclick="memoryPlus()">M+</td>
-                        <td class="operation" id="operation_memory_last" onclick="memoryMinus()">M-</td>
-                    </tr>
-                </table>
+                <div id="popup" class="">
+                    <span class="btn" onclick="addActive()"> <img src="assets/img/arrow.svg" alt="icon">
+                    </span>
+                    <div>
+                        <span class="operation" id="operation_factorial" onclick="arithmeticOperation('!')"><a>x!</a></span>
+                        <span class="operation" id="operation_exponentiation"
+                            onclick="arithmeticOperation('^')"><a>x^n</a></span>
+                        <span class="operation" id="operation_square_root" onclick="squareRoot()"><a>√x</a></span>
+                        <span class="operation" id="operation_memory_next" onclick="memoryPlus()"><a>M+</a></span>
+                        <span class="operation" id="operation_memory_last" onclick="memoryMinus()"><a>M-</a></span>
+                        <span class="operation" id="operation_convert_lenght" onclick="convertLenght()"><a>CL</a></span>
+                        <span class="operation" id="operation_convert_weights"
+                            onclick="convertWeights()"><a>CW</a></span>
+                        <span class="operation" id="operation_convert_area" onclick="convertArea()"><a>CA</a></span>
+                        <span class="operation" id="pi" onclick="addNewNumber('pi')"><a>&pi;</a></span>
+                        <span class="operation" id="e" onclick="addNewNumber('e')"><a>e</a></span>
+                        <span class="operation" id="left_bracket" onclick="addNewNumber('(')"><a>(</a></span>
+                        <span class="operation" id="right_bracket" onclick="addNewNumber(')')"><a>)</a></span>
+                    </div>
+                </div>
+
+                <div id="buttons_table">
+                    <div id="topRow">
+                        <span class="operation" id="MC" onclick="memoryClear()"><a>MC</a></span>
+                        <span class="operation" id="MS" onclick="memoryStore()"><a>MS</a></span>
+                        <span class="operation" id="MR" onclick="memoryRecall()"><a>MR</a></span>
+                        <span class="number" id="backspace" onclick="backspace()"><a><img src="assets/img/backspace.svg"
+                                    alt="Back"></a></span>
+                    </div>
+                    <div>
+                        <span class="operation" id="operation_clear" onclick="reset()"><a>C</a></span>
+                        <span class="operation" id="operation_plus-minus" onclick="toggleNumber()"><a>±</a></span>
+                        <span class="operation" id="operation_division"
+                            onclick="arithmeticOperation('/')"><a>/</a></span>
+                        <span class="number" id="number_multiple" onclick="arithmeticOperation('*')"><a>*</a></span>
+                    </div>
+                    <div>
+                        <span class="number" id="number_seven" onclick="addNewNumber(7)"><a>7</a></span>
+                        <span class="number" id="number_eight" onclick="addNewNumber(8)"><a>8</a></span>
+                        <span class="number" id="number_nine" onclick="addNewNumber(9)"><a>9</a></span>
+                        <span class="number" id="number_minus" onclick="arithmeticOperation('-')"><a>-</a></span>
+                    </div>
+                    <div>
+                        <span class="number" id="number_four" onclick="addNewNumber(4)"><a>4</a></span>
+                        <span class="number" id="number_five" onclick="addNewNumber(5)"><a>5</a></span>
+                        <span class="number" id="number_six" onclick="addNewNumber(6)"><a>6</a></span>
+                        <span class="number" id="number_plus" onclick="arithmeticOperation('+')"><a>+</a></span>
+                    </div>
+                    <div>
+                        <span class="number" id="number_one" onclick="addNewNumber(1)"><a>1</a></span>
+                        <span class="number" id="number_two" onclick="addNewNumber(2)"><a>2</a></span>
+                        <span class="number" id="number_three" onclick="addNewNumber(3)"><a>3</a></span>
+
+                    </div>
+                    <div>
+                        <span class="operation" id="operation_percent" onclick="percent()"><a>%</a></span>
+                        <span class="number" id="number_zero" onclick="addNewNumber(0)"><a>0</a></span>
+                        <span class="symbol" id="dot" onclick="addNewNumber('.')"><a>.</a></span>
+                        <span class="operation" id="operation_equal" rowspan="2" onclick="equals()"><a>=</a></span>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -74,6 +100,7 @@
     </main>
 
     <script src="js/script.js"></script>
+    <script src="js/animations.js"></script>
 
 </body>
 
