@@ -3,6 +3,10 @@ body {
     font-weight: 400;
 }
 
+td {
+    font-size: 30px;
+}
+
 #main_block {
     min-height: 600px;
     height: 60vh;
@@ -73,7 +77,7 @@ body {
     text-align: center;
     transition: 0.2s ease;
     background-color: rgba(123, 64, 233, 0.534);
-    width: 80px;
+    width: 100px;
 }
 
 .operation:hover, .number:hover, .symbol:hover {

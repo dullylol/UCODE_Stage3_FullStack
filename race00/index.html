@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -52,6 +52,22 @@
                         <td class="number" id="number_zero" onclick="addNewNumber(0)">0</td>
                         <td class="symbol" id="dot" onclick="addNewNumber('.')">.</td>
                         <td class="operation" id="operation_equal" colspan="2" onclick="equals()">=</td>
+                    </tr>
+                    <tr>
+                        <td class="operation" id="operation_factorial" onclick="arithmeticOperation('!')">X!</td>
+                        <td class="operation" id="operation_exponentiation" onclick="arithmeticOperation('ˆ')">xˆn</td>
+                        <td class="operation" id="operation_square_root" onclick="squareRoot()">√x</td>
+                        <td class="operation" id="operation_memory_recall" onclick="memoryRecall()">MR</td>
+                    </tr>
+                    <tr>
+                        <td class="operation" id="operation_memory_clear" onclick="memoryClear()">MC</td>
+                        <td class="operation" id="operation_memory_next" onclick="memoryPlus()">M+</td>
+                        <td class="operation" id="operation_memory_last" onclick="memoryMinus()">M-</td>
+                        <td class="operation" id="operation_convert_lenght" onclick="convertLenght()">CL</td>
+                    </tr>
+                    <tr>
+                        <td class="operation" id="operation_convert_weights" colspan="2" onclick="convertWeights()">CW</td>
+                        <td class="operation" id="operation_convert_area" colspan="2" onclick="convertArea()">CA</td>
                     </tr>
                 </table>
 
