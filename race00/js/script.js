@@ -2,19 +2,25 @@ let resultStr = document.getElementById("result_str")
 let inputStr = document.getElementById("input_str")
 
 //===============================onclick functions===============================//
+
+//-----------------------------Basic functions------------------------------
 function addNewNumber(num) {
     if (resultStr.value == 0) {
         resultStr.value = ""
     }
-    if (num == "e" && !isHaveDots()) {
+    if (num == "." && !isHaveDots()) {
+        resultStr.value += "."
+    }
+    else if (num == "e" && !isHaveDots()) {
         resultStr.value += 2.71
     }
     else if (num == "pi" && !isHaveDots()) {
         resultStr.value += 3.14
     }
-    else if (num != "e" && num != "pi") {
+    else if (num != "e" && num != "pi" && num != ".") {
         resultStr.value += num
     }
+
 }
 
 function arithmeticOperation(operation) {
@@ -31,6 +37,13 @@ function arithmeticOperation(operation) {
 function equals() {
     inputStr.innerHTML = resultStr.value
     resultStr.value = Number(eval(replaceHardOperations(resultStr.value)))
+
+    if (document.getElementById("currentSys").children[0].innerHTML == "BIN") {
+        resultStr.value = Number(resultStr.value).toString(2)
+    }
+    else if (document.getElementById("currentSys").children[0].innerHTML == "HEX") {
+        resultStr.value = resultStr.value.toString(16)
+    }
 }
 
 function toggleNumber() {
@@ -39,6 +52,7 @@ function toggleNumber() {
     }
     equals()
     resultStr.value = -Number(resultStr.value)
+
 }
 
 function percent() {
@@ -55,7 +69,11 @@ function reset() {
 }
 
 function backspace() {
-    resultStr.value =  resultStr.value.substring(0, resultStr.value.length - 1)
+    if (resultStr.value == "Infinity") {
+        resultStr.value = "0"
+        return
+    }
+    resultStr.value = resultStr.value.substring(0, resultStr.value.length - 1)
     if (resultStr.value == "") {
         resultStr.value = "0"
     }
@@ -67,7 +85,7 @@ function squareRoot() {
     }
 }
 
-//-----------------------History-----------------------
+//-----------------------------History------------------------------
 function memoryRecall() {
     if (resultStr.value != null) {
         localStorage.setItem("result", resultStr.value)
@@ -104,6 +122,141 @@ function memoryMinus() {
     }
 }
 
+//-----------------------------Convertations------------------------------
+function convertLenght() {
+    let selectorTop = document.getElementById("length_select_top")
+    let selectorBottom = document.getElementById("length_select_bottom")
+    let output = document.getElementById("length_output")
+
+    console.log(selectorTop.value)
+    console.log(selectorBottom.value)
+    console.log(output.innerHTML)
+
+    equals()
+    if (selectorTop.value == "centimeters") {
+        if (selectorBottom.value == "centimeters") {
+            output.innerHTML = resultStr.value
+        }
+        else if (selectorBottom.value == "meters") {
+            output.innerHTML = resultStr.value / 1_000
+        }
+        else if (selectorBottom.value == "kilometers") {
+            output.innerHTML = resultStr.value / 1_000_000
+        }
+    }
+    else if (selectorTop.value == "meters") {
+        if (selectorBottom.value == "centimeters") {
+            output.innerHTML = resultStr.value * 1_000
+        }
+        else if (selectorBottom.value == "meters") {
+            output.innerHTML = resultStr.value
+        }
+        else if (selectorBottom.value == "kilometers") {
+            output.innerHTML = resultStr.value / 1_000
+        }
+    }
+    else if (selectorTop.value == "kilometers") {
+        if (selectorBottom.value == "centimeters") {
+            output.innerHTML = resultStr.value * 1_000_000
+        }
+        else if (selectorBottom.value == "meters") {
+            output.innerHTML = resultStr.value * 1_000
+        }
+        else if (selectorBottom.value == "kilometers") {
+            output.innerHTML = resultStr.value
+        }
+    }
+}
+
+function convertWeight() {
+    let selectorTop = document.getElementById("weight_select_top")
+    let selectorBottom = document.getElementById("weight_select_bottom")
+    let output = document.getElementById("weight_ouput")
+
+    console.log(selectorTop.value)
+    console.log(selectorBottom.value)
+
+    equals()
+    if (selectorTop.value == "grams") {
+        if (selectorBottom.value == "grams") {
+            output.innerHTML = resultStr.value
+        }
+        else if (selectorBottom.value == "kilograms") {
+            output.innerHTML = resultStr.value / 1_000
+        }
+        else if (selectorBottom.value == "tonnes") {
+            output.innerHTML = resultStr.value / 1_000_000
+        }
+    }
+    else if (selectorTop.value == "kilograms") {
+        if (selectorBottom.value == "grams") {
+            output.innerHTML = resultStr.value * 1_000
+        }
+        else if (selectorBottom.value == "kilograms") {
+            output.innerHTML = resultStr.value
+        }
+        else if (selectorBottom.value == "tonnes") {
+            output.innerHTML = resultStr.value / 1_000
+        }
+    }
+    else if (selectorTop.value == "tonnes") {
+        if (selectorBottom.value == "grams") {
+            output.innerHTML = resultStr.value * 1_000_000
+        }
+        else if (selectorBottom.value == "kilograms") {
+            output.innerHTML = resultStr.value * 1_000
+        }
+        else if (selectorBottom.value == "tonnes") {
+            output.innerHTML = resultStr.value
+        }
+    }
+}
+
+function convertArea() {
+    let selectorTop = document.getElementById("area_select_top")
+    let selectorBottom = document.getElementById("area_select_bottom")
+    let output = document.getElementById("area_output")
+
+    console.log(selectorTop.value)
+    console.log(selectorBottom.value)
+    console.log(output.innerHTML)
+
+    equals()
+    if (selectorTop.value == "centimeters^2") {
+        if (selectorBottom.value == "centimeters^2") {
+            output.innerHTML = resultStr.value
+        }
+        else if (selectorBottom.value == "meters^2") {
+            output.innerHTML = resultStr.value / 1_000_000
+        }
+        else if (selectorBottom.value == "kilometers^2") {
+            output.innerHTML = resultStr.value / 1_000_000_000_000
+        }
+    }
+    else if (selectorTop.value == "meters^2") {
+        if (selectorBottom.value == "centimeters^2") {
+            output.innerHTML = resultStr.value * 1_000_000
+        }
+        else if (selectorBottom.value == "meters^2") {
+            output.innerHTML = resultStr.value
+        }
+        else if (selectorBottom.value == "kilometers^2") {
+            output.innerHTML = resultStr.value / 1_000_000
+        }
+    }
+    else if (selectorTop.value == "kilometers^2") {
+        if (selectorBottom.value == "centimeters^2") {
+            output.innerHTML = resultStr.value * 1_000_000_000_000
+        }
+        else if (selectorBottom.value == "meters^2") {
+            output.innerHTML = resultStr.value * 1_000_000
+        }
+        else if (selectorBottom.value == "kilometers^2") {
+            output.innerHTML = resultStr.value
+        }
+    }
+}
+
 //===============================helping functions===============================//
 
 function isOperation(operation) {
@@ -112,7 +265,7 @@ function isOperation(operation) {
         || operation == "!"
 }
 
-function replaceHardOperations(input) { 
+function replaceHardOperations(input) {
     let str = ""
 
     for (let i = 0; i < input.length; i++) {
@@ -124,6 +277,21 @@ function replaceHardOperations(input) {
 
     let arrStr = str.split(" ")
     let resArr = []
+
+    if (document.getElementById("currentSys").children[0].innerHTML == "BIN") {
+        for (let i = 0; i < arrStr.length; i++) {
+            if (!isOperation(arrStr[i])) {
+                arrStr[i] = parseInt(arrStr[i], 2)
+            }
+        }
+    }
+    else if (document.getElementById("currentSys").children[0].innerHTML == "HEX") {
+        for (let i = 0; i < arrStr.length; i++) {
+            if (!isOperation(arrStr[i])) {
+                arrStr[i] = parseInt(arrStr[i], 16)
+            }
+        }
+    }
 
     for (let i = 0; i < arrStr.length; i++) {
         if (arrStr[i + 1] == "^") {
@@ -165,3 +333,106 @@ function isHaveDots() {
     }
     return isHaveDots
 }
+
+//===============================Event listeners===============================//
+
+document.addEventListener('keydown', function (event) {
+    if (document.getElementById("currentSys").children[0].innerHTML == "DEC") {
+        console.log(event.key)
+        switch (event.key) {
+            case "0": addNewNumber(0); break
+            case "1": addNewNumber(1); break
+            case "2": addNewNumber(2); break
+            case "3": addNewNumber(3); break
+            case "4": addNewNumber(4); break
+            case "5": addNewNumber(5); break
+            case "6": addNewNumber(6); break
+            case "7": addNewNumber(7); break
+            case "8": addNewNumber(8); break
+            case "9": addNewNumber(9); break
+
+            case "Backspace": backspace(); break
+            case "Enter": equals(); break
+
+            case "+": arithmeticOperation('+'); break
+            case "-": arithmeticOperation('-'); break
+            case "*": arithmeticOperation('*'); break
+            case "/": arithmeticOperation('/'); break
+            case "^": case "ˆ": case "Dead": arithmeticOperation('^'); break
+            case "!": arithmeticOperation('!'); break
+
+            case "(": addNewNumber("("); break
+            case ")": addNewNumber(')'); break
+
+            case "%": percent(); break
+            case "√": squareRoot(); break
+            case ".": addNewNumber("."); break
+        }
+    }
+
+    else if (document.getElementById("currentSys").children[0].innerHTML == "HEX") {
+        switch (event.key) {
+            case "0": addNewNumber(0); break
+            case "1": addNewNumber(1); break
+            case "2": addNewNumber(2); break
+            case "3": addNewNumber(3); break
+            case "4": addNewNumber(4); break
+            case "5": addNewNumber(5); break
+            case "6": addNewNumber(6); break
+            case "7": addNewNumber(7); break
+            case "8": addNewNumber(8); break
+            case "9": addNewNumber(9); break
+
+            case "Backspace": backspace(); break
+            case "Enter": equals(); break
+
+            case "+": arithmeticOperation('+'); break
+            case "-": arithmeticOperation('-'); break
+            case "*": arithmeticOperation('*'); break
+            case "/": arithmeticOperation('/'); break
+            case "^": case "ˆ": arithmeticOperation('^'); break
+            case "!": arithmeticOperation('!'); break
+
+            case "(": addNewNumber("("); break
+            case ")": addNewNumber(')'); break
+
+            case "a":
+            case "A": addNewNumber("A"); break
+
+            case "b":
+            case "B": addNewNumber("B"); break
+
+            case "c":
+            case "C": addNewNumber("C"); break
+
+            case "d":
+            case "D": addNewNumber("D"); break
+
+            case "e":
+            case "E": addNewNumber("E"); break
+
+            case "f":
+            case "F": addNewNumber("F"); break
+        }
+    }
+
+    else if (document.getElementById("currentSys").children[0].innerHTML == "BIN") {
+        switch (event.key) {
+            case "0": addNewNumber(0); break
+            case "1": addNewNumber(1); break
+
+            case "Backspace": backspace(); break
+            case "Enter": equals(); break
+
+            case "+": arithmeticOperation('+'); break
+            case "-": arithmeticOperation('-'); break
+            case "*": arithmeticOperation('*'); break
+            case "/": arithmeticOperation('/'); break
+            case "^": case "ˆ": arithmeticOperation('^'); break
+            case "!": arithmeticOperation('!'); break
+
+            case "(": addNewNumber("("); break
+            case ")": addNewNumber(')'); break
+        }
+    }
+});
