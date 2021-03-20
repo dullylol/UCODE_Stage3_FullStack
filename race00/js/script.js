@@ -42,7 +42,7 @@ function equals() {
         resultStr.value = Number(resultStr.value).toString(2)
     }
     else if (document.getElementById("currentSys").children[0].innerHTML == "HEX") {
-        resultStr.value = resultStr.value.toString(16)
+        resultStr.value = Number(resultStr.value).toString(16).toUpperCase()
     }
 }
 
