@@ -1,9 +1,8 @@
 function addActive(_this) {
 	let popup = _this.parentNode;
-	console.log(popup);
 	popup.classList.toggle("active");
 	popup.querySelector(".btn").classList.toggle("active");
-	//document.querySelector(".contentBlocker").classList.toggle("active");
+	// document.querySelector(".contentBlocker").classList.toggle("active");
 }
 
 function changeSys(el) {
@@ -25,7 +24,7 @@ function changeSys(el) {
 
 	if (currentSys.querySelector("a").innerHTML == "BIN") {
 		document.querySelectorAll(".operation").forEach(element => {
-			if (element.innerText != "C" && element.innerText !=  "±" && element.innerText !=  "/" && element.innerText !=  "=" && element.innerText != "xˆn"    && element.innerText != "x!" && element.innerText != "M-"   && element.innerText != "M+" && element.innerText != ")" && element.innerText !=  "(") {
+			if (element.innerText != "C" && element.innerText !=  "/" && element.innerText !=  "=" && element.innerText != "xˆn"    && element.innerText != "x!" && element.innerText != "M-"   && element.innerText != "M+" && element.innerText != ")" && element.innerText !=  "(") {
 				element.classList.add("disable");
 			}
 		});

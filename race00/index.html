@@ -22,7 +22,7 @@
                onclick="systemActiveSwitcher()" 
                id="currentSys"><a>DEC</a></span>
                <div id="cooseOf">
-                   <div class="chooseSys__area" onclick="this.parentNode.classList.toggle('active')"></div>
+                   <!-- <div class="chooseSys__area" onclick="this.parentNode.classList.toggle('active')"></div> -->
                    <div class="chooseSys__content">
                         <span><a onclick="changeSys(this)">BIN</a></span>
                         <span><a onclick="changeSys(this)">HEX</a></span>
@@ -43,7 +43,7 @@
             </div>
 
             <div id="buttons_block">
-                <!-- <span id="contentBlocker" class="contentBlocker" onclick="addActive(this)"></span> -->
+                <!-- <span id="contentBlocker" class="contentBlocker" onclick="addActive(document.querySelector('#popup .btn'))"></span> -->
 
               <div id="popup" class="popup" >
                 <span class="btn" onclick="addActive(this)">    <img src="assets/img/arrow.svg" alt="icon">
@@ -80,7 +80,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="dropwindow__output" id="weight_ouput">output</div>
+                            <div class="dropwindow__output" id="weight_ouput"></div>
                         </div>
                     </div></span>
                   <span class="drop-trigger operation" id="operation_convert_area" onchange="convertArea()"><a>CA</a>
@@ -103,7 +103,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="dropwindow__output" id="area_output">output</div>
+                            <div class="dropwindow__output" id="area_output"></div>
                         </div>
                     </div></span>
                   
@@ -127,7 +127,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="dropwindow__output"  id="length_output">output</div>
+                            <div class="dropwindow__output"  id="length_output"></div>
                         </div>
                     </div></span>
                 </div>

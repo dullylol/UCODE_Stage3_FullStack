@@ -5,16 +5,22 @@ let inputStr = document.getElementById("input_str")
 
 //-----------------------------Basic functions------------------------------
 function addNewNumber(num) {
-    if (resultStr.value == 0) {
+    if (resultStr.value == "0" && num != "." && num != ")") {
         resultStr.value = ""
     }
-    if (num == "." && !isHaveDots()) {
+    if (num == "(" && isLastNumDigit()) {
+        return
+    }
+    if (num == ")" && !isPutRightBracket()) {
+        return
+    }
+    if (num == "." && !isHaveDots() && isLastNumDigit()) {
         resultStr.value += "."
     }
-    else if (num == "e" && !isHaveDots()) {
+    else if (num == "e" && !isHaveDots() && !isLastNumDigit()) {
         resultStr.value += 2.71
     }
-    else if (num == "pi" && !isHaveDots()) {
+    else if (num == "pi" && !isHaveDots() && !isLastNumDigit()) {
         resultStr.value += 3.14
     }
     else if (num != "e" && num != "pi" && num != ".") {
@@ -42,7 +48,7 @@ function equals() {
         resultStr.value = Number(resultStr.value).toString(2)
     }
     else if (document.getElementById("currentSys").children[0].innerHTML == "HEX") {
-        resultStr.value = Number(resultStr.value).toString(16).toUpperCase()
+        resultStr.value = Number(resultStr.value).toString(16).toLocaleUpperCase()
     }
 }
 
@@ -138,15 +144,15 @@ function convertLenght() {
             output.innerHTML = resultStr.value
         }
         else if (selectorBottom.value == "meters") {
-            output.innerHTML = resultStr.value / 1_000
+            output.innerHTML = resultStr.value / 100
         }
         else if (selectorBottom.value == "kilometers") {
-            output.innerHTML = resultStr.value / 1_000_000
+            output.innerHTML = resultStr.value / 100_000
         }
     }
     else if (selectorTop.value == "meters") {
         if (selectorBottom.value == "centimeters") {
-            output.innerHTML = resultStr.value * 1_000
+            output.innerHTML = resultStr.value * 100
         }
         else if (selectorBottom.value == "meters") {
             output.innerHTML = resultStr.value
@@ -157,7 +163,7 @@ function convertLenght() {
     }
     else if (selectorTop.value == "kilometers") {
         if (selectorBottom.value == "centimeters") {
-            output.innerHTML = resultStr.value * 1_000_000
+            output.innerHTML = resultStr.value * 100_000
         }
         else if (selectorBottom.value == "meters") {
             output.innerHTML = resultStr.value * 1_000
@@ -227,15 +233,15 @@ function convertArea() {
             output.innerHTML = resultStr.value
         }
         else if (selectorBottom.value == "meters^2") {
-            output.innerHTML = resultStr.value / 1_000_000
+            output.innerHTML = resultStr.value / 10_000
         }
         else if (selectorBottom.value == "kilometers^2") {
-            output.innerHTML = resultStr.value / 1_000_000_000_000
+            output.innerHTML = resultStr.value / 10_000_000_000
         }
     }
     else if (selectorTop.value == "meters^2") {
         if (selectorBottom.value == "centimeters^2") {
-            output.innerHTML = resultStr.value * 1_000_000
+            output.innerHTML = resultStr.value * 10_000
         }
         else if (selectorBottom.value == "meters^2") {
             output.innerHTML = resultStr.value
@@ -246,10 +252,10 @@ function convertArea() {
     }
     else if (selectorTop.value == "kilometers^2") {
         if (selectorBottom.value == "centimeters^2") {
-            output.innerHTML = resultStr.value * 1_000_000_000_000
+            output.innerHTML = resultStr.value * 10_000_000_000
         }
         else if (selectorBottom.value == "meters^2") {
-            output.innerHTML = resultStr.value * 1_000_000
+            output.innerHTML = resultStr.value * 10_000
         }
         else if (selectorBottom.value == "kilometers^2") {
             output.innerHTML = resultStr.value
@@ -280,27 +286,56 @@ function replaceHardOperations(input) {
 
     if (document.getElementById("currentSys").children[0].innerHTML == "BIN") {
         for (let i = 0; i < arrStr.length; i++) {
-            if (!isOperation(arrStr[i])) {
-                arrStr[i] = parseInt(arrStr[i], 2)
+            if (!isOperation(arrStr[i]) && arrStr[i] != "") {
+                if (arrStr[i][0] == "(") {
+                    arrStr[i] = "(" + parseInt(arrStr[i].substr(1, arrStr[i].length - 1), 2)
+                }
+                else if (arrStr[i][arrStr[i].length - 1] == ")") {
+                    arrStr[i] = parseInt(arrStr[i].substr(0, arrStr[i].length - 1), 2) + ")"
+                }
+                else {
+                    arrStr[i] = parseInt(arrStr[i], 2)
+                }
             }
         }
     }
     else if (document.getElementById("currentSys").children[0].innerHTML == "HEX") {
         for (let i = 0; i < arrStr.length; i++) {
-            if (!isOperation(arrStr[i])) {
-                arrStr[i] = parseInt(arrStr[i], 16)
+            if (!isOperation(arrStr[i]) && arrStr[i] != "") {
+                if (arrStr[i][0] == "(") {
+                    arrStr[i] = "(" + parseInt(arrStr[i].substr(1, arrStr[i].length - 1), 16)
+                }
+                else if (arrStr[i][arrStr[i].length - 1] == ")") {
+                    arrStr[i] = parseInt(arrStr[i].substr(0, arrStr[i].length - 1), 16) + ")"
+                }
+                else {
+                    arrStr[i] = parseInt(arrStr[i], 16)
+                }
             }
         }
     }
 
     for (let i = 0; i < arrStr.length; i++) {
         if (arrStr[i + 1] == "^") {
-            resArr.push(Math.pow(arrStr[i], arrStr[i + 2]))
+            if (arrStr[i][0] == "(") {
+                resArr.push("(" + Math.pow(arrStr[i].substr(1, arrStr[i].length - 1), arrStr[i + 2]))
+            }
+            else if (arrStr[i + 2][arrStr[i + 2].length - 1] == ")") {
+                resArr.push(Math.pow(arrStr[i], arrStr[i + 2].substr(0, arrStr[i + 2].length - 1)) + ")")
+            }
+            else {
+                resArr.push(Math.pow(arrStr[i], arrStr[i + 2]))
+            }
             i += 2
         }
         else if (arrStr[i + 1] == "!") {
-            resArr.push(factorial(arrStr[i]))
-            i += 2
+            if (arrStr[i][0] == "(") {
+                resArr.push("(" + factorial(arrStr[i].substr(1, arrStr[i].length - 1)))
+            }
+            else {
+                resArr.push(factorial(arrStr[i]))
+            }
+            i++
         }
         else {
             resArr.push(arrStr[i])
@@ -334,11 +369,27 @@ function isHaveDots() {
     return isHaveDots
 }
 
+function isLastNumDigit() {
+    return (Number.isInteger(Number(resultStr.value[resultStr.value.length - 1]))) ? true : false
+}
+
+function isPutRightBracket() {
+    let leftBracketsCount = 0
+    let rightBracketsCount = 0
+    for (let i = 0; i < resultStr.value.length; i++) {
+        if (resultStr.value[i] == "(") {
+            leftBracketsCount++
+        }
+        else if (resultStr.value[i] == ")") {
+            rightBracketsCount++
+        }
+    }
+    return (leftBracketsCount > rightBracketsCount) ? true : false
+}
 //===============================Event listeners===============================//
 
 document.addEventListener('keydown', function (event) {
     if (document.getElementById("currentSys").children[0].innerHTML == "DEC") {
-        console.log(event.key)
         switch (event.key) {
             case "0": addNewNumber(0); break
             case "1": addNewNumber(1); break
@@ -390,7 +441,7 @@ document.addEventListener('keydown', function (event) {
             case "-": arithmeticOperation('-'); break
             case "*": arithmeticOperation('*'); break
             case "/": arithmeticOperation('/'); break
-            case "^": case "ˆ": arithmeticOperation('^'); break
+            case "^": case "ˆ": case "Dead": arithmeticOperation('^'); break
             case "!": arithmeticOperation('!'); break
 
             case "(": addNewNumber("("); break
@@ -428,7 +479,7 @@ document.addEventListener('keydown', function (event) {
             case "-": arithmeticOperation('-'); break
             case "*": arithmeticOperation('*'); break
             case "/": arithmeticOperation('/'); break
-            case "^": case "ˆ": arithmeticOperation('^'); break
+            case "^": case "ˆ": case "Dead": arithmeticOperation('^'); break
             case "!": arithmeticOperation('!'); break
 
             case "(": addNewNumber("("); break
