@@ -2,11 +2,10 @@
 
 class Note {
 
-    // not private because json_encode return empty array
-    public $date;
-    public $name;
-    public $importance;
-    public $text;
+    private $date;
+    private $name;
+    private $importance;
+    private $text;
 
     public function __construct($name, $importance, $text)
     {
@@ -16,6 +15,10 @@ class Note {
         $this->text = $text;
     }
 
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
 
     public function getDate()
     {
