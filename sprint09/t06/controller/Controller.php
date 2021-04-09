@@ -26,9 +26,9 @@ class Controller
 
         $user = $usersDB->find($login);
         if (!$user) {
-            return "User with such username already exist!";
+            return "No such user!";
         } else if ($user->password != $password) {
-            return "User with such username already exist!";
+            return "Incorrect password!";
         } else {
             return ($user->status) ? "admin" : "user";
         }
