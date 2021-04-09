@@ -1,0 +1,3 @@
+use sword;
+ALTER TABLE users
+ADD COLUMN status VARCHAR(10) DEFAULT FALSE AFTER email;
