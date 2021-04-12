@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./view/templates/styles/common_style.css">
+    <link rel="stylesheet" href="./view/templates/styles/registration.css">
+    <title>Registration</title>
+</head>
+<body>
+
+<div id="login-box" class="left">
+    <h1>Registration</h1>
+
+    <form action="index.php" method="post">
+        <input type="text" name="name" id="name" placeholder="Full name" required/>
+        <input type="text" name="email" id="email" placeholder="E-mail" required/>
+        <input type="text" name="login" id="login" placeholder="Username" required/>
+        <input type="password" name="password" id="password" placeholder="Password" required/>
+        <input type="password" name="confirmed_password" id="confirmed_password" placeholder="Confirm password" required/>
+
+        <input type="submit" name="sign_up" value="Sign up" />
+    </form>
+
+    <form action="index.php" method="post">
+        <input type="submit" name="go_to_sign_in" value="Sign in" />
+    </form>
+
+</div>
+
+</body>
+</html>

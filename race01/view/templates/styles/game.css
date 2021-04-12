@@ -1,0 +1,32 @@
+body {
+  background: url("../../../res/images/background.jpeg");
+  background-size: 100%;
+}
+
+#login-box {
+  position: relative;
+  width: 330px;
+  height: 230px;
+  margin-left: 10px;
+}
+
+.statistic {
+  color: yellow;
+  font-size: 2em;
+}
+
+input[type="submit"] {
+  margin-top: 28px;
+  width: 140px;
+  height: 32px;
+  background: #17aa8c;
+  border: none;
+  border-radius: 2px;
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+

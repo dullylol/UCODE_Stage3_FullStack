@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <style>
+        #enemy {
+            position: relative;
+        }
+        #me {
+            margin-top: 20px;
+            position: relative;
+        }
+        #my_field {
+            display: flex;
+        }
+        #my_hand {
+            display: flex;
+            margin-top: 10px;
+            position: relative;
+        }
+        .my_card {
+            margin-left: 10px;
+            border: 1px solid black;
+            background-color: lightgreen;
+            font-size: x-large;
+        }
+        #enemy_field {
+            display: flex;
+        }
+        #enemy_hand {
+            position: relative;
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .enemy_card {
+            margin-left: 10px;
+            border: 1px solid black;
+            background-color: lightcoral;
+            font-size: x-large;
+        }
+        .visible_card {
+            visibility: visible;
+        }
+        .invisible_card {
+            visibility: hidden;
+        }
+
+    </style>
+
+    <div id="enemy">
+        <div id="enemy_hero">
+            <h1 id="enemy_hero_health"></h1><br>
+        </div>
+
+        <div id="enemy_hand">
+            <div class="enemy_card" id="enemy_hand_card3">
+                <label>Name: </label>
+                <label id="enemy_hand_card3_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_hand_card3_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_hand_card3_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_hand_card3_health"></label><br>
+                <input class="enemy_buttons" type="button" value="playCard" onclick="playCard(3, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card" id="enemy_hand_card2">
+                <label>Name: </label>
+                <label id="enemy_hand_card2_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_hand_card2_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_hand_card2_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_hand_card2_health"></label><br>
+                <input class="enemy_buttons" type="button" value="playCard" onclick="playCard(2, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card" id="enemy_hand_card1">
+                <label>Name: </label>
+                <label id="enemy_hand_card1_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_hand_card1_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_hand_card1_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_hand_card1_health"></label><br>
+                <input class="enemy_buttons" type="button" value="playCard" onclick="playCard(1, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card" id="enemy_hand_card0">
+                <label>Name: </label>
+                <label id="enemy_hand_card0_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_hand_card0_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_hand_card0_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_hand_card0_health"></label><br>
+                <input class="enemy_buttons" type="button" value="playCard" onclick="playCard(0, 'enemy')"><br>
+            </div>
+        </div>
+
+        <div id="enemy_field">
+            <div class="enemy_card invisible_card" id="enemy_field_card5">
+                <label>Name: </label>
+                <label id="enemy_field_card5_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_field_card5_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_field_card5_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_field_card5_health"></label><br>
+                <input class="enemy_buttons" type="button" value="attack" onclick="attack(5, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card invisible_card" id="enemy_field_card4">
+                <label>Name: </label>
+                <label id="enemy_field_card4_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_field_card4_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_field_card4_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_field_card4_health"></label><br>
+                <input class="enemy_buttons" type="button" value="attack" onclick="attack(4, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card invisible_card" id="enemy_field_card3">
+                <label>Name: </label>
+                <label id="enemy_field_card3_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_field_card3_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_field_card3_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_field_card3_health"></label><br>
+                <input class="enemy_buttons" type="button" value="attack" onclick="attack(3, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card invisible_card" id="enemy_field_card2">
+                <label>Name: </label>
+                <label id="enemy_field_card2_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_field_card2_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_field_card2_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_field_card2_health"></label><br>
+                <input class="enemy_buttons" type="button" value="attack" onclick="attack(2, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card invisible_card" id="enemy_field_card1">
+                <label>Name: </label>
+                <label id="enemy_field_card1_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_field_card1_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_field_card1_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_field_card1_health"></label><br>
+                <input class="enemy_buttons" type="button" value="attack" onclick="attack(1, 'enemy')"><br>
+            </div>
+    
+            <div class="enemy_card invisible_card" id="enemy_field_card0">
+                <label>Name: </label>
+                <label id="enemy_field_card0_name"></label><br>
+                <label>Cost: </label>
+                <label id="enemy_field_card0_cost"></label><br>
+                <label>Power: </label>
+                <label id="enemy_field_card0_power"></label><br>
+                <label>Health: </label>
+                <label id="enemy_field_card0_health"></label><br>
+                <input class="enemy_buttons" type="button" value="attack" onclick="attack(0, 'enemy')"><br>
+            </div>
+        </div>
+    </div>
+
+    <div id="me">
+        <div id="my_field">
+            <div class="my_card invisible_card" id="my_field_card5">
+                <label>Name: </label>
+                <label id="my_field_card5_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_field_card5_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_field_card5_power"></label><br>
+                <label>Health: </label>
+                <label id="my_field_card5_health"></label><br>
+                <input class="my_buttons" type="button" value="attack" onclick="attack(5, 'me')"><br>
+            </div>
+
+            <div class="my_card invisible_card" id="my_field_card4">
+                <label>Name: </label>
+                <label id="my_field_card4_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_field_card4_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_field_card4_power"></label><br>
+                <label>Health: </label>
+                <label id="my_field_card4_health"></label><br>
+                <input class="my_buttons" type="button" value="attack" onclick="attack(4, 'me')"><br>
+            </div>
+
+            <div class="my_card invisible_card" id="my_field_card3">
+                <label>Name: </label>
+                <label id="my_field_card3_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_field_card3_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_field_card3_power"></label><br>
+                <label>Health: </label>
+                <label id="my_field_card3_health"></label><br>
+                <input class="my_buttons" type="button" value="attack" onclick="attack(3, 'me')"><br>
+            </div>
+
+            <div class="my_card invisible_card" id="my_field_card2">
+                <label>Name: </label>
+                <label id="my_field_card2_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_field_card2_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_field_card2_power"></label><br>
+                <label>Health: </label>
+                <label id="my_field_card2_health"></label><br>
+                <input class="my_buttons" type="button" value="attack" onclick="attack(2, 'me')"><br>
+            </div>
+
+            <div class="my_card invisible_card" id="my_field_card1">
+                <label>Name: </label>
+                <label id="my_field_card1_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_field_card1_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_field_card1_power"></label><br>
+                <label>Health: </label>
+                <label id="my_field_card1_health"></label><br>
+                <input class="my_buttons" type="button" value="attack" onclick="attack(1, 'me')"><br>
+            </div>
+
+            <div class="my_card invisible_card" id="my_field_card0">
+                <label>Name: </label>
+                <label id="my_field_card0_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_field_card0_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_field_card0_power"></label><br>
+                <label>Health: </label>
+                <label id="my_field_card0_health"></label><br>
+                <input class="my_buttons" type="button" value="attack" onclick="attack(0, 'me')"><br>
+            </div>
+        </div>
+
+        <div id="my_hand">
+            <div class="my_card" id="my_hand_card3">
+                <label>Name: </label>
+                <label id="my_hand_card3_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_hand_card3_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_hand_card3_power"></label><br>
+                <label>Health: </label>
+                <label id="my_hand_card3_health"></label><br>
+                <input class="my_buttons" type="button" value="playCard" onclick="playCard(3, 'me')"><br>
+            </div>
+
+            <div class="my_card" id="my_hand_card2">
+                <label>Name: </label>
+                <label id="my_hand_card2_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_hand_card2_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_hand_card2_power"></label><br>
+                <label>Health: </label>
+                <label id="my_hand_card2_health"></label><br>
+                <input class="my_buttons" type="button" value="playCard" onclick="playCard(2, 'me')"><br>
+            </div>
+
+            <div class="my_card" id="my_hand_card1">
+                <label>Name: </label>
+                <label id="my_hand_card1_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_hand_card1_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_hand_card1_power"></label><br>
+                <label>Health: </label>
+                <label id="my_hand_card1_health"></label><br>
+                <input class="my_buttons" type="button" value="playCard" onclick="playCard(1, 'me')"><br>
+            </div>
+
+            <div class="my_card" id="my_hand_card0">
+                <label>Name: </label>
+                <label id="my_hand_card0_name"></label><br>
+                <label>Cost: </label>
+                <label id="my_hand_card0_cost"></label><br>
+                <label>Power: </label>
+                <label id="my_hand_card0_power"></label><br>
+                <label>Health: </label>
+                <label id="my_hand_card0_health"></label><br>
+                <input class="my_buttons" type="button" value="playCard" onclick="playCard(0, 'me')"><br>
+            </div>
+        </div>
+
+        <div id="my_hero">
+            <h1 id="my_hero_health"></h1><br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 id="time">30</h2>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
