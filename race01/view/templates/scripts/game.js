@@ -17,6 +17,34 @@ class Card {
 
 }
 
+//============================SUPER BOT==================================
+class Bot {
+    start() {
+        let count = 0
+        for (let i = 0; i < enemyHand.length; i++) {
+            if (enemyHand[i] != null) count++
+            setTimeout(() => {
+                if (enemyHand[i] != null) {
+                    playCard(i, "enemy")
+                }
+            }, 1000 * i)
+        }
+        for (let i = 0; i < enemyField.length; i++) {
+            if (enemyField[i] != null) count++
+            setTimeout(() => {
+                if (enemyField[i] != null) {
+                    attack(i, "enemy")
+                }
+            }, 1000 * i + enemyHand.length * 1000)
+
+        }
+        setTimeout(() => {
+            pass()
+        }, count * 1000)
+    }
+}
+//=======================================================================
+
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
 }
@@ -35,18 +63,38 @@ function getDeck() {
     ]
 }
 
+function putCardToHand(gamer) {
+    if (gamer == "me" && myDeck != null) {
+        for (let i = 0; i < myHand.length; i++) {
+            if (myHand[i] == null) {
+                myHand[i] = myDeck.pop()
+                document.getElementById(`my_hand_card${i}_button`).disabled = false
+                break
+            }
+        }
+    } else if (gamer == "enemy") {
+        for (let i = 0; i < enemyHand.length; i++) {
+            if (enemyHand[i] == null) {
+                enemyHand[i] = enemyDeck.pop()
+                document.getElementById(`enemy_hand_card${i}_button`).disabled = false
+                break
+            }
+        }
+    }
+}
+
 function render() {
     // me
     let index = 0
     myField.forEach(element => {
         if (element != null) {
-            document.getElementById(`my_field_card${index}`).classList = "my_card visible_card"
+            document.getElementById(`my_field_card${index}`).classList = "card my_card visible_card"
             document.getElementById(`my_field_card${index}_name`).innerHTML = element.name
             document.getElementById(`my_field_card${index}_cost`).innerHTML = element.cost
             document.getElementById(`my_field_card${index}_power`).innerHTML = element.power
             document.getElementById(`my_field_card${index}_health`).innerHTML = element.health
         } else {
-            document.getElementById(`my_field_card${index}`).classList = "my_card invisible_card"
+            document.getElementById(`my_field_card${index}`).classList = "card my_card invisible_card"
         }
         index++
     })
@@ -54,13 +102,13 @@ function render() {
     index = 0
     myHand.forEach(element => {
         if (element != null) {
-            document.getElementById(`my_hand_card${index}`).classList = "my_card visible_card"
+            document.getElementById(`my_hand_card${index}`).classList = "card my_card visible_card"
             document.getElementById(`my_hand_card${index}_name`).innerHTML = element.name
             document.getElementById(`my_hand_card${index}_cost`).innerHTML = element.cost
             document.getElementById(`my_hand_card${index}_power`).innerHTML = element.power
             document.getElementById(`my_hand_card${index}_health`).innerHTML = element.health
         } else {
-            document.getElementById(`my_hand_card${index}`).classList = "my_card invisible_card"
+            document.getElementById(`my_hand_card${index}`).classList = "card my_card invisible_card"
         }
         index++
     })
@@ -97,10 +145,17 @@ function render() {
     //heroes
     document.getElementById("my_hero_health").innerHTML = me.health
     document.getElementById("enemy_hero_health").innerHTML = enemy.health
+
+    //manna
+    document.getElementById("manna").innerHTML = `${manna} / ${absoluteManna}`
+
 }
 
 function playCard(index, gamer) {
-    if (gamer == "me") {
+    if (gamer == "me" && myHand[index] != null && myHand[index].cost <= manna) {
+        manna -= myHand[index].cost
+        document.getElementById("manna").innerHTML = `${manna} / ${absoluteManna}`
+
         for (let i = 0; i < FIELD; i++) {
             if (myField[i] == null) {
                 myField[i] = myHand[index]
@@ -108,7 +163,10 @@ function playCard(index, gamer) {
                 break
             }
         }
-    } else if (gamer == "enemy") {
+    } else if (gamer == "enemy" && enemyHand[index] != null && enemyHand[index].cost <= manna) {
+        manna -= enemyHand[index].cost
+        document.getElementById("manna").innerHTML = `${manna} / ${absoluteManna}`
+
         for (let i = 0; i < FIELD; i++) {
             if (enemyField[i] == null) {
                 enemyField[i] = enemyHand[index]
@@ -122,7 +180,7 @@ function playCard(index, gamer) {
 }
 
 function attack(index, gamer) {
-    if (gamer == "me") {
+    if (gamer == "me" && document.getElementById(`my_field_card${index}_button`).disabled == false) {
         if (enemyField[index] != null) {
             myField[index].health -= enemyField[index].power
             enemyField[index].health -= myField[index].power
@@ -139,7 +197,9 @@ function attack(index, gamer) {
                 winner = "me"
             }
         }
-    } else if (gamer == "enemy") {
+        document.getElementById(`my_field_card${index}_button`).disabled = "true"
+
+    } else if (gamer == "enemy" && document.getElementById(`enemy_field_card${index}_button`).disabled == false) {
         if (myField[index] != null) {
             myField[index].health -= enemyField[index].power
             enemyField[index].health -= myField[index].power
@@ -156,6 +216,7 @@ function attack(index, gamer) {
                 winner = "enemy"
             }
         }
+        document.getElementById(`enemy_field_card${index}_button`).disabled = "true"
     }
 
     // cards moving
@@ -178,29 +239,63 @@ function attack(index, gamer) {
 
 function changeTurn() {
     if (turn == "me") {
+        putCardToHand("me")
         turn = "enemy"
         for (let i = 0; i < myButtons.length; i++) {
-            myButtons[i].disabled = false
+            if (!myButtons[i].parentNode.classList.toString().includes("invisible_card")) {
+                myButtons[i].disabled = false
+            }
         }
         for (let i = 0; i < enemyButtons.length; i++) {
             enemyButtons[i].disabled = true
         }
     } else if (turn == "enemy") {
+        putCardToHand("enemy")
         turn = "me"
         for (let i = 0; i < myButtons.length; i++) {
             myButtons[i].disabled = true
         }
         for (let i = 0; i < enemyButtons.length; i++) {
-            enemyButtons[i].disabled = false 
+            if (!enemyButtons[i].parentNode.classList.toString().includes("invisible_card")) {
+                enemyButtons[i].disabled = false
+            }
         }
     }
 }
 
 
-function endTurn() {
-    //TODO add endTurn button
+function pass() {
+    clearInterval(interval)
+    time = 31
+    if (turn == "me") {
+        changeTurn() 
+    } else if (turn == "enemy") {
+        changeTurn()
+        bot.start()
+        if (absoluteManna < 10) {
+            absoluteManna++
+        }
+    }
+    manna = absoluteManna
+    interval = setInterval(() => {
+        if (gameOver) {
+            gameOverFunc()
+            clearInterval(interval)
+            clearInterval(timer)
+        }
+        if (turn == "me") {
+            changeTurn() 
+        } else if (turn == "enemy") {
+            changeTurn()
+            bot.start()
+            if (absoluteManna < 10) {
+                absoluteManna++
+            }
+        }
+        manna = absoluteManna
+        time = 31
+    }, 30000)
 }
-
 
 // constants
 const DECK = 20
@@ -213,6 +308,8 @@ var gameOver = false
 var winner = null
 var time = 30
 var turn = "me"
+var absoluteManna = 1
+var manna = 1
 var myButtons = document.getElementsByClassName("my_buttons")
 var enemyButtons = document.getElementsByClassName("enemy_buttons")
 
@@ -227,6 +324,9 @@ var enemyDeck = getDeck()
 var enemyHand = new Array(HAND)
 var enemyField = new Array(FIELD)
 
+//bot
+var bot = new Bot()
+
 shuffle(myDeck)
 for (let i = 0; i < HAND; i++) {
     myHand[i] = myDeck.pop()
@@ -239,13 +339,23 @@ for (let i = 0; i < HAND; i++) {
 
 render()
 changeTurn()
+changeTurn()
+
+if (Math.random() < 0.5) {
+    changeTurn()
+}
+if (turn == "me") {
+    bot.start()
+}
 
 // turns interval
 var timer = setInterval(() => {
     document.getElementById("time").innerHTML = --time
+    render()
     if (gameOver) {
-        clearInterval(timer)
+        gameOverFunc()
         clearInterval(interval)
+        clearInterval(timer)
     }
 }, 1000)
 
@@ -254,7 +364,16 @@ var interval = setInterval(() => {
         changeTurn()
     } else if (turn == "enemy") {
         changeTurn()
+        bot.start()
+        if (absoluteManna < 10) {
+            absoluteManna++
+        }
     }
-    time = 30
+    manna = absoluteManna
+    time = 31
 }, 30000)
 
+
+function gameOverFunc() {
+    alert("Game over! Winner: " + winner)
+}
