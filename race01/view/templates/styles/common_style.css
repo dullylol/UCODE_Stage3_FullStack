@@ -2,11 +2,18 @@
 *:focus {
   outline: none;
 }
+body {
+  background: url("./../background.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 0;
+}
 
 body {
   margin: 0;
   padding: 0;
-  background: #DDD;
   font-size: 16px;
   color: #222;
   font-family: 'Roboto', sans-serif;
@@ -14,6 +21,7 @@ body {
 }
 
 .left {
+  color: white;
   position: absolute;
   top: 0;
   box-sizing: border-box;

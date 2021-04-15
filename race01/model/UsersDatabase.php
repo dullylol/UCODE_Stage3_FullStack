@@ -30,14 +30,14 @@ class UsersDatabase extends DatabaseModel
                 $preparedRequest->execute();
                 $pdo = $preparedRequest->fetch(PDO::FETCH_ASSOC);
                 if (!$pdo) {
-                    $newRequest =   "INSERT INTO $this->table (name, email, login, password, wins, loses)
-                                    VALUES (\"$user->name\", \"$user->email\", \"$user->login\", \"$user->password\", \"$user->wins\", \"$user->loses\");";
+                    $newRequest =   "INSERT INTO $this->table (name, email, login, password, games_count)
+                                    VALUES (\"$user->name\", \"$user->email\", \"$user->login\", \"$user->password\", \"$user->gamesCount\");";
 
                     $this->databaseConnection->connection->prepare($newRequest)->execute();
                     return "insert";
                 }
                 else {
-                    $newRequest = "UPDATE $this->table SET name = \"$user->name\", email = \"$user->email\", password = \"$user->password\", wins = \"$user->wins\", loses = \"$user->loses\" WHERE login = \"$user->login\"";
+                    $newRequest = "UPDATE $this->table SET name = \"$user->name\", email = \"$user->email\", password = \"$user->password\", games_count = \"$user->gamesCount\" WHERE login = \"$user->login\"";
                     $this->databaseConnection->connection->prepare($newRequest)->execute();
                     return "update";
                 }
@@ -80,7 +80,7 @@ class UsersDatabase extends DatabaseModel
                 $preparedRequest->execute();
                 $pdo = $preparedRequest->fetch(PDO::FETCH_ASSOC);
                 if ($pdo) {
-                    $this->user = new User($pdo["name"], $pdo["email"], $pdo["login"], $pdo["password"], $pdo["wins"], $pdo["loses"]);
+                    $this->user = new User($pdo["name"], $pdo["email"], $pdo["login"], $pdo["password"], $pdo["games_count"]);
                     return $this->user;
                 }
             }

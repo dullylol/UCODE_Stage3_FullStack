@@ -58,5 +58,15 @@ class Controller
         }
     }
 
+    public function addGame($login) {
+        $usersDatabase = new UsersDatabase("users");
+        $user = $usersDatabase->find($login);
+        $this->user = $user;
+
+        if ($user) {
+            $user->gamesCount++;
+            $usersDatabase->save($user);
+        }
+    }
 
 }

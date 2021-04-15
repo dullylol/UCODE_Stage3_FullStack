@@ -6,17 +6,15 @@ class User
     public $email;
     public $login;
     public $password;
-    public $wins;
-    public $loses; 
+    public $gamesCount; 
 
-    public function __construct($name, $email, $login, $password, $wins = 0, $loses = 0)
+    public function __construct($name, $email, $login, $password, $gamesCount = 0)
     {
         $this->name = $name;
         $this->email = $email;
         $this->login = $login;
         $this->password = $password;
-        $this->wins = $wins;
-        $this->loses = $loses;
+        $this->gamesCount = $gamesCount;
     }
 
     public function __toString()
@@ -25,8 +23,7 @@ class User
             \nname: $this->email;
             \nemail: $this->login;
             \npassword: $this->password;\n
-            \nwins: $this->password;\n
-            \nloses: $this->password;\n
+            \ngames_count: $this->gamesCount;\n
         }";
     }
 }

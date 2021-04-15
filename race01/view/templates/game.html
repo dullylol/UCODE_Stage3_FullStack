@@ -1,25 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./view/templates/styles/game.css">
-    <title>CyberStone</title>
-</head>
-<body>
-
-    <div id="login-box" class="left">
-        <h1 class="statistic">#USER#</h1>
-        <label class="statistic">Wins: #WINS#</label><br>
-        <label class="statistic">Loses: #LOSES#</label>
-
-        <form action="index.php" method="post">   
-            <input type="submit" name="log_out" value="Log out">
-        </form>
+    <head>
+      <title>Cards</title>
+      <meta charset="utf-8">
+      <meta name="description" content="Card game">
+      <link rel="stylesheet" href="./view/templates/styles/game.css">
+      <link rel="icon" href="./view/templates/icon.png">
+      <script src="view/templates/scripts/game.js" defer></script>
+    </head>
+    <body>
+        <div id="game_field">
+        <!-- ########################################################### ENEMY_ICON ######################################################################################################################### -->
+        <div class="user noselect" id="enemy_hero">
+            <img draggable="false" src="https://miro.medium.com/max/564/1*1R2Yt-uMk3k--vi7bWOqSA.jpeg">
+            <div class="health">
+                <div class="drop">
+                    <svg viewbox="0 0 30 42">
+                        <path fill="#b31217" stroke="black" stroke-width="1"
+                                d="M15 3
+                                    Q16.5 6.8 25 18
+                                    A12.8 12.8 0 1 1 5 18
+                                    Q13.5 6.8 15 3z" />
+                    </svg>
+                </div>
+                <p id="enemy_hero_health">30</p>
+            </div>
+            <div class="name"><h1 class="noselect" id="enemy_name">#OPENED#</h1></div>
+        </div>
+        <!-- ########################################################### USER_ICON ######################################################################################################################### -->
+        <div class="user noselect" id="my_hero">
+            <img draggable="false" src="https://i.pinimg.com/originals/78/ac/aa/78acaad3c2890c0d47f94ec7b3cce9fb.jpg">
+            <div class="health">
+                <div class="drop">
+                    <svg viewbox="0 0 30 42">
+                        <path fill="#b31217" stroke="black" stroke-width="1"
+                            d="M15 3
+                                Q16.5 6.8 25 18
+                                A12.8 12.8 0 1 1 5 18
+                                Q13.5 6.8 15 3z" />
+                    </svg>
+                </div>
+                <p id="my_hero_health">30</p>
+            </div>
+            <div class="name"><h1 class="noselect" id="my_name">#USER#</h1></div>
+        </div>
+        <!-- ########################################################### LOGIN_BOX ######################################################################################################################### -->
+        <div id="login-box">
+            <label class="statistic noselect">Games played: <span>#GAMES_PLAYED#</span></label><br>
+            <form method="POST" action="index.php"><input class="btn noselect" type="submit" name="log_out" value="Log out" id="log_out_btn"></form>
+        </div>
+        <!-- ########################################################### ENEMY_AREA ######################################################################################################################### -->
+        <div class="area noselect" id="enemy_area">
+            <!-- ########################################################### ENEMY_FIELD ######################################################################################################################### -->
+            <div class="field" id="enemy_field">
+                <div class="card enemy_card invisible" id="enemy_field_card5">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="enemy_field_card5_img">
+                    <div class="card_name" id="enemy_field_card5_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_field_card5_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="enemy_field_card5_health">%</p></div>
+                </div>
+                <div class="card enemy_card invisible" id="enemy_field_card4">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="enemy_field_card4_img">
+                    <div class="card_name" id="enemy_field_card4_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_field_card4_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="enemy_field_card4_health">%</p></div>
+                </div>
+                <div class="card enemy_card invisible" id="enemy_field_card3" disabled>
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="enemy_field_card3_img">
+                    <div class="card_name" id="enemy_field_card3_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_field_card3_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="enemy_field_card3_health">%</p></div>
+                </div>
+                <div class="card enemy_card invisible" id="enemy_field_card2" disabled>
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="enemy_field_card2_img">
+                    <div class="card_name" id="enemy_field_card2_name">Doggy</div>
+                    <div class="stat attack">
+                        <img src="./view/templates/attack.png">
+                        <p id="enemy_field_card2_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="enemy_field_card2_health">%</p></div>
+                </div>
+                <div class="card enemy_card invisible" id="enemy_field_card1">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="enemy_field_card1_img">
+                    <div class="card_name" id="enemy_field_card1_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_field_card1_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="enemy_field_card1_health">%</p></div>
+                </div>
+                <div class="card enemy_card invisible" id="enemy_field_card0">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="enemy_field_card0_img">
+                    <div class="card_name" id="enemy_field_card0_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_field_card0_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="enemy_field_card0_health">%</p></div>
+                </div>
+            </div>
+            <!-- ########################################################### ENEMY_HAND ######################################################################################################################### -->
+            <div class="card_wrapper" id="enemy_hand">
+                <div class="card enemy_card invisible" id="enemy_hand_card3">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img">
+                    <div class="stat mana_cost"><p id="enemy_hand_card3_cost">%</p></div>
+                    <div class="card_name" id="enemy_hand_card3_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_hand_card3_power">%</p>
+                    </div>
+                    <div class="stat health">
+                        <p id="enemy_hand_card3_health">%</p>
+                    </div>
+                </div>
+                <div class="card enemy_card" id="enemy_hand_card2">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img">
+                    <div class="stat mana_cost"><p id="enemy_hand_card2_cost">%</p></div>
+                    <div class="card_name"  id="enemy_hand_card2_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_hand_card2_power">%</p>
+                    </div>
+                    <div class="stat health">
+                        <p id="enemy_hand_card2_health">%</p>
+                    </div>
+                </div>
+                <div class="card enemy_card"  id="enemy_hand_card1">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img">
+                    <div class="stat mana_cost"><p id="enemy_hand_card1_cost">%</p></div>
+                    <div class="card_name" id="enemy_hand_card1_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_hand_card1_power">%</p>
+                    </div>
+                    <div class="stat health">
+                        <p id="enemy_hand_card1_health">%</p>
+                    </div>
+                </div>
+                <div class="card enemy_card" id="enemy_hand_card0">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img">
+                    <div class="stat mana_cost"><p id="enemy_hand_card0_cost">%</p></div>
+                    <div class="card_name" id="enemy_hand_card0_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="enemy_hand_card0_power">%</p>
+                    </div>
+                    <div class="stat health">
+                        <p id="enemy_hand_card0_health">%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ########################################################### MY_AREA ######################################################################################################################### -->
+        <div class="area noselect" id="my_area">
+            <!-- ########################################################### MY_FIELD ######################################################################################################################### -->
+            <div class="field" id="my_field">
+                <div class="card my_card invisible" id="my_field_card5" onclick="attack(5, 'me')" disabled>
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="my_field_card5_img">
+                    <div class="card_name" id="my_field_card5_name">Black Panther da da</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_field_card5_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_field_card5_health">%</p></div>
+                </div>
+                <div class="card my_card invisible" id="my_field_card4" onclick="attack(4, 'me')" disabled>
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="my_field_card4_img">
+                    <div class="card_name" id="my_field_card4_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_field_card4_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_field_card4_health">%</p></div>
+                </div>
+                <div class="card my_card invisible" id="my_field_card3" onclick="attack(3, 'me')">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="my_field_card3_img">
+                    <div class="card_name" id="my_field_card3_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_field_card3_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_field_card3_health">%</p></div>
+                </div>
+                <div class="card my_card invisible" id="my_field_card2" onclick="attack(2, 'me')">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="my_field_card2_img">
+                    <div class="card_name" id="my_field_card2_name">Doggy</div>
+                    <div class="stat attack">
+                        <img src="./view/templates/attack.png">
+                        <p id="my_field_card2_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_field_card2_health">%</p></div>
+                </div>
+                <div class="card my_card invisible" id="my_field_card1" onclick="attack(1, 'me')">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="my_field_card1_img">
+                    <div class="card_name" id="my_field_card1_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_field_card1_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_field_card1_health">%</p></div>
+                </div>
+                <div class="card my_card invisible" id="my_field_card0" onclick="attack(0, 'me')">
+                    <img draggable="false" class="card_img" src="./view/templates/card_default.jpeg" alt="field_img" id="my_field_card0_img">
+                    <div class="card_name" id="my_field_card0_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_field_card0_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_field_card0_health">%</p></div>
+                </div>
+            </div>
+            <!-- ########################################################### MY_HAND ######################################################################################################################### -->
+            <div class="card_wrapper" id="my_hand">
+                <div class="card my_card no_hover" id="my_hand_card3" onclick="playCard(3, 'me')">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img" id="my_hand_card3_img">
+                    <div class="stat mana_cost"><p id="my_hand_card3_cost">%</p></div>
+                    <div class="card_name" id="my_hand_card3_name">Black Panther da da</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_hand_card3_power">10</p>
+                    </div>
+                    <div class="stat health"><p id="my_hand_card3_health">%</p></div>
+                </div>
+                <div class="card my_card" id="my_hand_card2" onclick="playCard(2, 'me')" enabled>
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img" id="my_hand_card2_img">
+                    <div class="stat mana_cost"><p id="my_hand_card2_cost">%</p></div> 
+                    <div class="card_name" id="my_hand_card2_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_hand_card2_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_hand_card2_health">%</p></div>
+                </div>
+                <div class="card my_card" id="my_hand_card1" onclick="playCard(1, 'me')">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img" id="my_hand_card1_img">
+                    <div class="stat mana_cost"><p id="my_hand_card1_cost">%</p></div>
+                    <div class="card_name" id="my_hand_card1_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_hand_card1_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_hand_card1_health">%</p></div>
+                </div>
+                <div class="card my_card invisible" id="my_hand_card0" onclick="playCard(0, 'me')">
+                    <img draggable="false" src="./view/templates/card_default.jpeg" alt="card_img" id="my_hand_card0_img">
+                    <div class="stat mana_cost"><p id="my_hand_card0_cost">%</p></div>
+                    <div class="card_name" id="my_hand_card0_name">Doggy</div>
+                    <div class="stat attack">
+                        <img draggable="false" src="./view/templates/attack.png">
+                        <p id="my_hand_card0_power">%</p>
+                    </div>
+                    <div class="stat health"><p id="my_hand_card0_health">%</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- ########################################################### RESOURCES ######################################################################################################################### -->
+        <div class="resources">
+            <h2 class="statistic noselect">Time: <span id="time">30</span></h2>
+            <h2 class="statistic noselect">Mana: <span id="manna">10/10</span></h2>
+            <input class="btn" type="button" value="end turn" onclick="pass()" id="pass" >
+        </div>
+        <!-- ########################################################### DECKS ######################################################################################################################### -->
+        <div class="deck" id="enemy_deck">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <span id="enemy_deck_number">16</span>
+        </div>
+        <div class="deck" id="my_deck">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <span id="my_deck_number">16</span>
+        </div>
     </div>
-
-    
-    <script src="./view/templates/scripts/game.js"></script>
-</body>
+    <div id="warning_message"><span>Turn your device or make the window bigger to continue gaming</span></div>
+    <div class="noselect" id="game_over_screen">
+        <span id="result">You lost!</span>
+        <div id="button_holder">    
+            <form method="POST" action="index.php"><input class="btn noselect" type="submit" name="log_out" value="Log out" id="log_out_finish_btn"></form>
+            <input type="button" class="btn noselect" value="Restart" id="btn_restart" onclick="restart()">
+        </div>
+    </div>
+    </body>
 </html>
+
+<!-- https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg dog pic--> 

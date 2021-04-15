@@ -1,32 +1,786 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
 body {
-  background: url("../../../res/images/background.jpeg");
-  background-size: 100%;
+    background: url("./../background.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
 }
-
+.area {
+    position: absolute;
+    height: 49.71vh;
+    width: 99.85vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#my_area {
+	bottom: 0;
+}
+#enemy_area {
+    top: 0;
+}
+.field {
+    display: flex;
+    margin-right: 20%;
+    margin-left: 20%;
+    font-family: 'New Tegomin', sans-serif;
+    float: left;
+    position: absolute;
+    backdrop-filter: blur(5px);
+}
+.field img {
+    border-radius: 20px;
+    position: relative;
+    height: 150px;
+    width: 150px;
+}
+.field .card {
+    border-radius: 50%;
+    height: 230px;
+    transition: 0.3s ease;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;  
+}
+.field .card .attack {
+    left: -165px;
+    bottom: 0;
+}
+.field .card .health {
+    margin-left: 120px;
+    left: 10px;
+    bottom: 0px;
+}
+.field .card .card_img {
+    border-radius: 50%; 
+    width: 90%;
+    margin-left: 6px;
+}
+#my_field {
+    position: absolute;
+    top: 0;
+}
+.my_card {
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.my_card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px black;
+}
+.my_card:active {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 50, 212, 0.8);
+}
+.my_card[disabled]:hover {
+    transform: translateY(0px);
+    box-shadow: none;
+}
+.my_card[disabled] {
+    cursor: auto;
+}
+#enemy_field {
+    bottom: 0;
+}
+.card_wrapper {
+    display: flex;
+    border: 3px solid white;
+    font-family: 'New Tegomin', sans-serif;
+    float: left;
+    position: absolute;
+    backdrop-filter: blur(10px);
+}
+#my_hand {
+    bottom: 0;
+    border: 5px dashed blue;
+}
+#my_hand .card {
+    background: #6357a8;
+    cursor: pointer;
+    transition: 0.2s ease;
+    transition-property: transform, box-shadow;
+    transform: translateY(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;    
+}
+#my_hand .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+#my_hand .card:active {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 50, 212, 0.8);
+}
+#enemy_hand {
+    top: 0;
+    border: 5px dashed red;
+}
+#enemy_hand .card {
+    background: transparent;
+    background-image: url(./../card_back.png);
+    border: none;
+    background-size: 171px 235px;
+    background-repeat: no-repeat;
+}
+#enemy_hand .card img {
+    visibility: hidden;
+}
+#enemy_hand .card .attack {
+    visibility: hidden;
+}
+#enemy_hand .card .health {
+    visibility: hidden;
+}
+#enemy_hand .card .mana_cost {
+    visibility: hidden;
+}
+#enemy_hand .card .card_name {
+    visibility: hidden;
+}
+.card {
+    position: relative;
+    width: 150px;
+    height: 215px;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 21px;
+    background: #c0c0c0;    
+}
+.card img {
+    border-radius: 20px;    
+    height: 150px;
+    width: 150px;
+    border: 2px solid black;
+    margin-left: -2px;
+}
+.card .stat {
+    border-radius: 50%;
+    position: relative;
+    height: 40px;
+    width: 40px;
+    margin-left: 90%;
+    color: white;
+}
+.card .stat p {
+    padding: 5px;
+    margin-top: 0px;
+    text-align: center;
+}
+.card .mana_cost {
+    position: absolute;
+    margin-top: -180px;
+    margin-left: 140px;
+    clip-path: polygon(25% 0%, 71% 14%, 96% 48%, 61% 100%, 27% 90%, 11% 40%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card:nth-child(1) .mana_cost {
+    background: #1338d2;
+}
+.card:nth-child(2) .mana_cost {
+    background: #b90301;
+}
+.card:nth-child(3) .mana_cost {
+    background: #6a02d5;
+}
+.card:nth-child(4) .mana_cost {
+    background: #e67309;
+}
+.card .mana_cost p {
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 900;
+}
+.card .card_name {
+    color: black;
+    text-align: center;
+    margin: auto;
+    margin-top: 0px;
+    font-size: 20px;    
+}
+.card .attack {
+    position: absolute;
+    left: -170px;
+    bottom: -20px;
+    z-index: 0;
+    background: #92901d;
+    height: 50px;
+    width: 50px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}   
+.card .attack img {
+    position: absolute;
+    z-index: 1;
+    border-radius: 0px; 
+    margin-left: 0px;
+    margin-top: 0px;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-90deg);
+    flex-shrink: 0;
+    border: 0;
+}
+.card .attack p {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    margin: auto;
+    flex-shrink: 0;
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 900;
+}
+.card .health {
+    position: absolute;
+    left: -20px;
+    bottom: -20px;
+    background: #b31217;
+    height: 50px;
+    width: 50px;
+    font-size: 35px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 900;
+}
+.enemy_card {
+    background: #741c1c;
+}
+.my_card {
+    background: #6357a8;
+}
+.invisible .mana_cost,
+.invisible .card_name,
+.invisible .attack,
+.invisible .health,
+.invisible img{
+    visibility: hidden;
+}
+.invisible{
+    background: transparent !important;
+    cursor: auto;
+    transition: 0.1s ease;
+    cursor: auto !important;
+}
+.invisible:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+#my_hand .invisible,
+#my_field .invisible{
+    border: 2px dashed blue;
+}
+#enemy_hand .invisible,
+#enemy_field .invisible{
+    border: 2px dashed red;
+}
+.user {
+    position: relative;
+    margin-left: 70px;
+    height: 300px;
+    width: 200px;
+}
+.user .name {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    left: 0;
+}
+#my_name {
+    position: absolute;
+    margin-top: -50px;
+    border: 2px solid blue;
+    background: #6357a8; 
+    color: blue;
+}
+#enemy_name {
+    position: absolute;
+    top: 285px;
+    border: 2px solid red;
+    background: #741c1c;
+    color: red;
+}
+.user img {
+    border-radius: 45%;
+    position: absolute;
+    height: 300px;
+    width: 200px;
+    z-index: 1;
+}
+.user .health {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    z-index: 2;
+}
+.user .health p {
+    font-family: 'New Tegomin', sans-serif;
+    font-size: 30px;
+    color: white;
+    padding: 10px;
+    margin-top: -65px;
+    text-align: center;
+}
+.user .health .drop {
+    margin-top: -15px;
+}
+#enemy_hero {
+    margin-top: 50px;
+    z-index: 10;
+}
+#enemy_hero img {
+    border: 2px solid red;
+}
+#my_hero {
+    position: absolute;
+    bottom: 50px;
+    z-index: 10;
+}
+#my_hero img {
+    position: absolute;
+    bottom: 0;
+    border: 2px solid blue; 
+}
 #login-box {
-  position: relative;
-  width: 330px;
-  height: 230px;
-  margin-left: 10px;
+    position: absolute;
+    text-align: center;
+    padding-top: 35px;
+    margin: 0;
+    top: 50%;
+    left: 30px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 20%;
+    border: 3px solid black;
+    background: #3101b3;
+    width: 250px;
+    height: 180px;
+    z-index: 1;
+}
+#login-box .statistic {
+    color: yellow;
+    font-family: 'New Tegomin', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+#login-box .statistic span {
+    color: aqua;
+}
+.btn {
+    margin-top: 28px;
+    width: 140px;
+    height: 32px;
+    background: #17aa8c;
+    border: none;
+    border-radius: 5px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.1s ease;
+    cursor: pointer;
+    outline: none;
+    z-index: 0;
+}
+.btn:hover:enabled {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all .2s;
+    color: #ff7a59;
+    border: #ff7a59 solid 1px;
+    background: black;
+}
+.btn:active:enabled {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
+}
+.btn:disabled,
+.btn[disabled] {
+    cursor: auto;
+}
+.resources {
+    position: absolute;
+    text-align: center;
+    padding-top: 20px;
+    margin: 0;
+    top: 50%;
+    right: 29px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);  
+    border-radius: 20%;
+    border: 3px solid black;
+    background: #3101b3;
+    width: 250px;
+    height: 170px;
+}
+.resources h2 {
+    color: yellow;
+    margin: 0;
+    font-family: 'New Tegomin', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+#time {
+    color: aqua;
+}
+#pass {
+    width: 140px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    background: #17aa8c;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.1s ease;
+    cursor: pointer;
+    outline: none;
+}
+#manna {
+    color: aqua;
+    text-align: center;
+}
+.deck {
+    position: absolute;
+    float: right;
+    border: 3px solid rgba(0, 0, 0, 1);
+    background: black;
+    margin: 0;
+    -ms-transform: translateY(-20%);
+    transform: translateY(-20%);  
+    right: 69px;
+    width: 171px;
+    height: 235px;
+}
+.deck div {
+    position: absolute;
+    background-image: url(./../card_back.png);
+    border: none;
+    width: 171px;
+    height: 235px;
+    background-size: 171px 235px;
+    background-repeat: no-repeat;
+}
+.deck div:nth-child(1) {
+    position: absolute;
+    z-index: 2;
+}
+.deck div:nth-child(2){
+    position: absolute;
+    z-index: 3;
+    transform: translateY(-8px);
+}
+.deck div:nth-child(3){
+    position: absolute;
+    z-index: 4;
+    transform: translateY(-16px);
+}
+.deck div:nth-child(4){
+    position: absolute;
+    z-index: 5;
+    transform: translateY(-24px);
+}
+.deck span {
+    position: absolute;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 10px;
+    z-index: 6;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+}
+#enemy_deck {
+    top: 220px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+#my_deck {
+    bottom: 200px;
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+}
+#warning_message {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+#warning_message span {
+    color: white;
+    font-family: 'New Tegomin', sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    font-size: 15px;
+    vertical-align: middle;
+}
+#game_over_screen {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    text-align: center;
+}
+#button_holder {
+    display: flex;
+    flex-direction: row;
+}
+#result {
+    position: relative;
+    text-align: center;
+    margin: 0;
+    top: 45%;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    color: white;
+    background-color: #1338d2;
+    border-radius: 10px;
+    width: 10em;
+    height: 2em;
+    font-family: 'New Tegomin', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+#button_holder {  
+    text-align:center;
+    position: relative;
+    margin: auto;
+    /* height: auto; */
+}
+#btn_restart {
+    margin-left: 10px;
 }
 
-.statistic {
-  color: yellow;
-  font-size: 2em;
+#log_out_finish_btn {
+    margin-right: 10px;
 }
-
-input[type="submit"] {
-  margin-top: 28px;
-  width: 140px;
-  height: 32px;
-  background: #17aa8c;
-  border: none;
-  border-radius: 2px;
-  color: #FFF;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: 0.1s ease;
-  cursor: pointer;
+/* #button_holder .btn {
+    margin: 10px;
+    padding: 10px;
+} */
+/* #btn_restart {
+    padding:50px;
+} */
+/* .accelerate {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+} */
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
 }
-
+@media screen and (max-height: 1193px), screen and (max-width: 1930px) {
+    .field {
+        transform: scale(0.8);
+    }
+    #my_field {
+        top: -30px;
+    }
+    #enemy_field {
+        bottom: -30px;
+    }
+    .card_wrapper {
+        transform: scale(0.8);  
+    }
+    #my_hand {
+        bottom: -29px;   
+    }
+    #enemy_hand {
+        top: -29px;  
+    }
+    .user {
+        transform: scale(0.8);
+    }
+    #enemy_hero {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+    #my_hero {
+        margin-left: 20px;
+        bottom: 0px;
+    }
+    #login-box {
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%) scale(0.8);
+        top: 50%;
+        left: -3px;
+    }
+    .resources {
+        -ms-transform: translateY(-50%);
+        transform: scale(0.8) translateY(-50%);
+        top: 50%;
+        right: -4px;
+    }
+    .deck {
+        -ms-transform: translateY(-20%) !important;
+        transform: translateY(-20%) scale(0.8) !important;
+        right: 35px;
+    }
+    #enemy_deck {
+        top: 110px;
+    }
+    #my_deck {
+        bottom: 0;
+    }
+}
+@media screen and (max-height: 952px), screen and (max-width: 1535px) {
+    .field {
+        transform: scale(0.6);
+    }
+    #my_field {
+        top: -61px;
+    }
+    #enemy_field {
+        bottom: -61px;
+    }
+    .card_wrapper {
+        transform: scale(0.6);  
+    }
+    #my_hand {
+        bottom: -57px;   
+    }
+    #enemy_hand {
+        top: -58px;  
+    }
+    #login-box {
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%) scale(0.6);
+        top: 50%;
+        left: -35px;
+    }
+    .resources {
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%) scale(0.6);
+        top: 50%;
+        right: -35px;
+    }
+    .user {
+        transform: scale(0.6);
+    }
+    #enemy_hero {
+        margin-top: -40px;
+        margin-left: -15px;
+    }
+    #my_hero {
+        bottom: -40px;
+        margin-left: -15px;
+    }
+    .deck {
+        -ms-transform: translateY(-20%) !important;
+        transform: translateY(-20%) scale(0.6) !important;
+        right: 5px;
+    }
+    #enemy_deck {
+        top: 70px;
+    }
+    #my_deck {
+        bottom: -40px;
+    }
+}
+@media screen and (max-height: 717px), screen and (max-width: 1222px) {
+    .field {
+        transform: scale(0.4);
+    }
+    #my_field {
+        top: -90px;
+    }
+    #enemy_field {
+        bottom: -90px;
+    }
+    .card_wrapper {
+        transform: scale(0.4);  
+    }
+    #my_hand {
+        bottom: -87px;   
+    }
+    #enemy_hand {
+        top: -87px;  
+    }
+    #login-box {
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%) scale(0.4);
+        top: 50%;
+        left: -65px;
+    }
+    .resources {
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%) scale(0.4);
+        top: 50%;
+        right: -65px;
+    }
+    .user {
+        transform: scale(0.4);
+    }
+    #enemy_hero {
+        margin-top: -70px;
+        margin-left: -40px;
+    }
+    #my_hero {
+        bottom: -70px;
+        margin-left: -40px;
+    }
+    .deck {
+        -ms-transform: translateY(-20%) !important;
+        transform: translateY(-20%) scale(0.4) !important;
+        right: -25px;
+    }
+    #enemy_deck {
+        top: 30px;
+    }
+    #my_deck {
+        bottom: -80px;
+    }
+}
+@media screen and (max-height: 477px), screen and (max-width: 768px) {
+    #game_field {
+        display: none;
+    }
+    #warning_message {
+        display: flex;
+    }
+    #game_over_screen {
+        display: none;
+    }
+    #result {
+        display: none;  
+    }
+    #btn_restart {
+        display: none;
+    }
+    #log_out_finish_btn {
+        display: none;
+    }
+}
